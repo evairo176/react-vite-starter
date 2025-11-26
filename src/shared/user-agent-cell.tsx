@@ -9,6 +9,7 @@ import {
 
 interface Props {
   value?: string | null;
+  modal?: boolean;
 }
 
 const Badge: React.FC<{ children: React.ReactNode; className?: string }> = ({
@@ -24,7 +25,7 @@ const Badge: React.FC<{ children: React.ReactNode; className?: string }> = ({
   </span>
 );
 
-const UserAgentCell: React.FC<Props> = ({ value }) => {
+const UserAgentCell: React.FC<Props> = ({ value, modal = false }) => {
   const uaString = value ?? "";
   if (!uaString) return <div className="text-sm text-slate-500">—</div>;
 
@@ -45,9 +46,54 @@ const UserAgentCell: React.FC<Props> = ({ value }) => {
 
   return (
     <div className="flex flex-col gap-1">
-      <Tooltip>
-        <TooltipTrigger>
-          {" "}
+      {!modal && (
+        <Tooltip>
+          <TooltipTrigger>
+            {" "}
+            <div className="flex items-center gap-3">
+              {/* Left: simple circle/icon with initials (bisa ganti ke svg/icon library) */}
+              <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 border">
+                <span className="text-sm font-semibold text-slate-700">
+                  {browser.name ? browser.name.slice(0, 2).toUpperCase() : "UA"}
+                </span>
+              </div>
+
+              {/* Main info */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <div className="text-sm font-medium truncate">
+                    {browserLabel}
+                  </div>
+                  <div className="text-xs text-slate-400 truncate">
+                    · {osLabel}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 mt-1">
+                  <Badge className="bg-white">{deviceLabel}</Badge>
+                  {device.vendor && (
+                    <Badge className="bg-white">{device.vendor}</Badge>
+                  )}
+                  {device.model && (
+                    <Badge className="bg-white">{device.model}</Badge>
+                  )}
+                  {engine.name && (
+                    <Badge className="bg-white">{engine.name}</Badge>
+                  )}
+                </div>
+              </div>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            {/* Optional: lihat full UA di tooltip / kecil untuk debugging */}
+            <div className="text-xs text-slate-400 break-words max-w-full">
+              {uaString}
+            </div>
+          </TooltipContent>
+        </Tooltip>
+      )}
+      {modal && (
+        <div>
           <div className="flex items-center gap-3">
             {/* Left: simple circle/icon with initials (bisa ganti ke svg/icon library) */}
             <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 border">
@@ -81,14 +127,11 @@ const UserAgentCell: React.FC<Props> = ({ value }) => {
               </div>
             </div>
           </div>
-        </TooltipTrigger>
-        <TooltipContent>
-          {/* Optional: lihat full UA di tooltip / kecil untuk debugging */}
           <div className="text-xs text-slate-400 break-words max-w-full">
             {uaString}
           </div>
-        </TooltipContent>
-      </Tooltip>
+        </div>
+      )}
     </div>
   );
 };

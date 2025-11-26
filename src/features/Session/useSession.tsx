@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const useSession = () => {
   const { currentLimit, currentPage, currentSearch } = useChangeUrl();
-  const [selectedId, setSelectedId] = useState<string>("");
+  const [selected, setSelected] = useState<string>("");
   const getSessionByUser = async () => {
     let params = `limit=${currentLimit}&page=${currentPage}`;
 
@@ -36,8 +36,8 @@ const useSession = () => {
     isRefetchingSession,
     refetchSession,
 
-    selectedId,
-    setSelectedId,
+    selected,
+    setSelected,
   };
 };
 

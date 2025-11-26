@@ -1,4 +1,4 @@
-import { Loader, MoreVertical, Plus } from "lucide-react";
+import { Loader, MoreVertical, Plus, Trash } from "lucide-react";
 
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
@@ -22,6 +22,7 @@ import UserAgentCell from "@/shared/user-agent-cell";
 import ExpiredAtCell from "@/shared/expired-at-cell";
 import IsCurrentCell from "@/shared/is-current-cell";
 import IsRevokedCell from "@/shared/is-revoke-cell";
+import RevokeModal from "./RevokeModal";
 
 const Session = () => {
   const {
@@ -30,9 +31,11 @@ const Session = () => {
     isRefetchingSession,
     refetchSession,
 
-    selectedId,
-    setSelectedId,
+    selected,
+    setSelected,
   } = useSession();
+
+  const [revokeModal, setRevokeModal] = useState(false);
 
   const columns: ColumnDef<IPSession>[] = [
     {
@@ -116,42 +119,56 @@ const Session = () => {
       enableSorting: true,
       enableHiding: true,
     },
-    // {
-    //   id: "actions",
-    //   enableHiding: false,
+    {
+      id: "actions",
+      enableHiding: false,
 
-    //   cell: ({ row }) => {
-    //     const table = row.original;
+      cell: ({ row }) => {
+        const table = row.original;
 
-    //     return (
-    //       <DropdownMenu>
-    //         <DropdownMenuTrigger asChild>
-    //           <Button variant="ghost" className="h-8 w-8 p-0">
-    //             <span className="sr-only">Open menu</span>
-    //             <MoreHorizontal />
-    //           </Button>
-    //         </DropdownMenuTrigger>
-    //         <DropdownMenuContent align="end">
-    //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
+        if (table.isCurrent || table.isRevoke) {
+          return (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <MoreHorizontal />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          );
+        }
 
-    //           <DropdownMenuItem
-    //             onClick={() => {
-    //               setSelectedId(table.id as string);
-    //               const data =
-    //                 dataSession?.data?.find(
-    //                   (row: IPSession) => row.id === table.id
-    //                 ) || null;
-    //               //   setSelected(data);
-    //               //   setEditModal(true);
-    //             }}
-    //           >
-    //             Edit
-    //           </DropdownMenuItem>
-    //         </DropdownMenuContent>
-    //       </DropdownMenu>
-    //     );
-    //   },
-    // },
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => {
+                  const data =
+                    dataSession?.data?.find(
+                      (row: IPSession) => row.id === table.id
+                    ) || null;
+                  setSelected(data);
+                  setRevokeModal(true);
+                }}
+              >
+                <Trash className="text-red-500" /> Revoke Session
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
   ];
 
   return (
@@ -173,6 +190,12 @@ const Session = () => {
           </CardContent>
         </Card>
       </div>
+      <RevokeModal
+        open={revokeModal}
+        setOpen={setRevokeModal}
+        data={selected}
+        refetch={refetchSession}
+      />
     </div>
   );
 };

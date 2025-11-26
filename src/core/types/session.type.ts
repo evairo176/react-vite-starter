@@ -5,4 +5,5 @@ export interface IPSession {
   createdAt: string;
   expiredAt: string;
   isCurrent: boolean;
+  isRevoke: boolean;
 }
