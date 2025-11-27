@@ -96,8 +96,8 @@ const Session = () => {
         <DataTableColumnHeader column={column} title="Expired At" />
       ),
       cell: ({ row }) => {
-        const data: any = row.original;
-        return <ExpiredAtCell value={data?.expiredAt} />;
+        const data = row.original;
+        return <ExpiredAtCell value={data.expiredAt} />;
       },
       enableSorting: true,
       enableHiding: true,

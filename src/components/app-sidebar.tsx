@@ -27,7 +27,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     >
       <SidebarHeader>
         {/* <TeamSwitcher teams={data.teams} /> */}
-        <div>Logo</div>
+        <div className="text-3xl font-bold text-center underline">Evairo</div>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />

@@ -16,6 +16,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import DynamicBreadcrumb from "@/shared/dynamic-breadcrumb";
 
 const DashboardLayout = () => {
   return (
@@ -45,19 +46,12 @@ const DashboardLayout = () => {
                 className="mr-2 data-[orientation=vertical]:h-4"
               />
 
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink href="#">
-                      Building Your Application
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator className="hidden md:block" />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+              <DynamicBreadcrumb
+                showHome
+                homeLabel="Beranda"
+                labelMap={{ products: "Produk", users: "Pengguna" }}
+                activeClassName="breadcrumb-active"
+              />
 
               {/* kanan: contoh slot untuk search / actions (glassy button) */}
               <div className="ml-auto flex items-center gap-2 pr-2">

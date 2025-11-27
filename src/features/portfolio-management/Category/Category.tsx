@@ -1,0 +1,177 @@
+import { Loader, MoreVertical, Plus, Trash } from "lucide-react";
+
+import { MoreHorizontal } from "lucide-react";
+import { useState } from "react";
+
+import type { ColumnDef } from "@tanstack/react-table";
+import { DataTableColumnHeader } from "@/shared/table/data-table-column-header";
+import { fmtDate } from "@/core/utils/date";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { DataTable } from "@/shared/table/data-table";
+import UserAgentCell from "@/shared/user-agent-cell";
+import ExpiredAtCell from "@/shared/expired-at-cell";
+import IsCurrentCell from "@/shared/is-current-cell";
+import IsRevokedCell from "@/shared/is-revoke-cell";
+import useCategory from "./useCategory";
+import type { IPCategory } from "@/core/types/category.type";
+
+const Category = () => {
+  const {
+    dataCategory,
+    isLoadingCategory,
+    isRefetchingCategory,
+    refetchCategory,
+
+    selected,
+    setSelected,
+  } = useCategory();
+
+  const columns: ColumnDef<IPCategory>[] = [
+    {
+      accessorKey: "id",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Id" />
+      ),
+      cell: ({ row }) => {
+        const table = row.original;
+
+        return <div className="text-left font-medium">{table.id}</div>;
+      },
+      accessorFn: (row) => row.id, // fallback
+      enableSorting: false,
+      enableHiding: true,
+    },
+    {
+      accessorKey: "name",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Name" />
+      ),
+      cell: ({ row }) => {
+        const table: any = row.original;
+
+        return <div className="text-left font-medium">{table.name}</div>;
+      },
+      enableSorting: false,
+      enableHiding: true,
+    },
+    {
+      accessorKey: "slug",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Slug" />
+      ),
+      cell: ({ row }) => {
+        const table: any = row.original;
+
+        return <div className="text-left font-medium">{table.slug}</div>;
+      },
+      enableSorting: false,
+      enableHiding: true,
+    },
+
+    {
+      accessorKey: "updatedAt",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Update Date" />
+      ),
+      cell: ({ row }) => {
+        const table: any = row.original;
+
+        return (
+          <div className="text-left text-sm font-medium">
+            {fmtDate(table.updatedAt)}
+          </div>
+        );
+      },
+      enableSorting: true,
+      enableHiding: true,
+    },
+    // {
+    //   id: "actions",
+    //   enableHiding: false,
+
+    //   cell: ({ row }) => {
+    //     const table = row.original;
+
+    //     if (table.isCurrent || table.isRevoke) {
+    //       return (
+    //         <DropdownMenu>
+    //           <DropdownMenuTrigger asChild>
+    //             <Button variant="ghost" className="h-8 w-8 p-0">
+    //               <span className="sr-only">Open menu</span>
+    //               <MoreHorizontal />
+    //             </Button>
+    //           </DropdownMenuTrigger>
+    //           <DropdownMenuContent align="end">
+    //             <DropdownMenuLabel>Actions</DropdownMenuLabel>
+    //           </DropdownMenuContent>
+    //         </DropdownMenu>
+    //       );
+    //     }
+
+    //     return (
+    //       <DropdownMenu>
+    //         <DropdownMenuTrigger asChild>
+    //           <Button variant="ghost" className="h-8 w-8 p-0">
+    //             <span className="sr-only">Open menu</span>
+    //             <MoreHorizontal />
+    //           </Button>
+    //         </DropdownMenuTrigger>
+    //         <DropdownMenuContent align="end">
+    //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
+    //           <DropdownMenuItem
+    //             onClick={() => {
+    //               const data =
+    //                 dataCategory?.data?.find(
+    //                   (row: IPCategory) => row.id === table.id
+    //                 ) || null;
+    //               setSelected(data);
+    //               setRevokeModal(true);
+    //             }}
+    //           >
+    //             <Trash className="text-red-500" /> Revoke Category
+    //           </DropdownMenuItem>
+    //         </DropdownMenuContent>
+    //       </DropdownMenu>
+    //     );
+    //   },
+    // },
+  ];
+
+  return (
+    <div className="md:p-6 p-4">
+      <h1 className="text-2xl font-bold">Category management</h1>
+      <p>Manage and review Category data for companies within the system</p>
+      <div className="w-full grid gap-2 relative overflow-x-hidden">
+        <Card className="mt-3">
+          <CardContent>
+            <DataTable
+              totalPages={dataCategory?.metadata?.totalPages}
+              totalData={dataCategory?.metadata?.total}
+              columns={columns}
+              data={dataCategory?.data || []}
+              isLoading={isLoadingCategory}
+              refetch={refetchCategory}
+              excelName="Category"
+            />
+          </CardContent>
+        </Card>
+      </div>
+      {/* <RevokeModal
+        open={revokeModal}
+        setOpen={setRevokeModal}
+        data={selected}
+        refetch={refetchCategory}
+      /> */}
+    </div>
+  );
+};
+
+export default Category;

@@ -36,11 +36,11 @@ export function NavUser({
 
   const handleLogout = async () => {
     try {
+      await authService.logout();
+
       cleanup();
 
       logout();
-
-      await authService.logout();
 
       navigate("/");
     } catch (error) {

@@ -9,6 +9,7 @@ import Login from "@/features/auth/Login";
 import AuthLayout from "../layouts/AuthLayout";
 import Home from "@/features/dashboard/Home";
 import Session from "@/features/Session";
+import Category from "@/features/portfolio-management/Category";
 
 const router = createBrowserRouter([
   // 🔹 USER BELUM LOGIN
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
   },
 
   {
-    element: <ProtectedRoute allowed={[1]} />,
+    element: <ProtectedRoute allowed={[]} />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
         children: [
           { path: "/dashboard", element: <Home /> },
           { path: "/session", element: <Session /> },
+          { path: "/portfolio-management/category", element: <Category /> },
           { path: "*", element: <NotFound /> },
         ],
       },
