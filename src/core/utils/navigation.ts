@@ -56,6 +56,18 @@ export const data = {
           url: "/portfolio-management/category",
         },
         {
+          title: "Tag",
+          url: "/portfolio-management/tag",
+        },
+        {
+          title: "Tech Stack",
+          url: "/portfolio-management/tech-stack",
+        },
+        {
+          title: "Image Source",
+          url: "/portfolio-management/image",
+        },
+        {
           title: "Portfolio",
           url: "/portfolio-management/portfolio",
         },
