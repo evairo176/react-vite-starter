@@ -7,13 +7,13 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import NotFound from "@/shared/pages/NotFound";
 import Login from "@/features/auth/Login";
 import AuthLayout from "../layouts/AuthLayout";
-import Home from "@/features/dashboard/Home";
 import Session from "@/features/Session";
 import Category from "@/features/portfolio-management/Category";
 import Tag from "@/features/portfolio-management/Tag";
 import TechStack from "@/features/portfolio-management/TechStack";
 import Image from "@/features/portfolio-management/Image";
 import Portfolio from "@/features/portfolio-management/Portfolio";
+import Home from "@/features/Home";
 
 const router = createBrowserRouter([
   // 🔹 USER BELUM LOGIN
@@ -25,7 +25,8 @@ const router = createBrowserRouter([
       {
         element: <AuthLayout />,
         children: [
-          { path: "/", element: <Login /> },
+          { path: "/", element: <Home /> },
+          { path: "/login", element: <Login /> },
           { path: "*", element: <NotFound /> },
         ],
       },

@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const usePortfolio = () => {
   const { currentLimit, currentPage, currentSearch } = useChangeUrl();
-  const [selected, setSelected] = useState<string>("");
+  const [selected, setSelected] = useState(null);
   const findAll = async () => {
     let params = `limit=${currentLimit}&page=${currentPage}`;
 

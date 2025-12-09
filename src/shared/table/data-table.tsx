@@ -21,8 +21,8 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
-  getSortedRowModel, // 🆕
-  type SortingState, // 🆕
+  getSortedRowModel,
+  type SortingState,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -55,6 +55,7 @@ import {
   Save,
   Search,
   SquareCheckBig,
+  Inbox
 } from "lucide-react";
 
 import * as XLSX from "xlsx";
@@ -64,6 +65,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import useChangeUrl from "@/hooks/useChangeUrl";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // --- util: HTML -> teks polos
 const htmlToText = (html: string) =>
@@ -160,7 +162,7 @@ export function DataTable<TData, TValue>({
     handleClearSearch,
     currentSearch,
   } = useChangeUrl();
-  const [sorting, setSorting] = useState<SortingState>([]); // 🆕
+  const [sorting, setSorting] = useState<SortingState>([]);
   const page = Math.max(1, Number(currentPage));
   const limit = Math.max(1, Number(currentLimit));
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -178,13 +180,13 @@ export function DataTable<TData, TValue>({
     pageCount: totalPages,
     state: {
       pagination: paginationState,
-      sorting, // 🆕
+      sorting,
       rowSelection,
     },
-    onSortingChange: setSorting, // 🆕
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(), // 🆕
+    getSortedRowModel: getSortedRowModel(),
     manualPagination: true, // (tetap server-side paginate)
     onRowSelectionChange: setRowSelection,
   });
@@ -284,19 +286,20 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center justify-between pb-4">
-        <div className="flex w-full max-w-xs items-center relative gap-2">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 gap-4">
+        <div className="flex w-full max-w-sm items-center relative gap-2">
           <Input
             onChange={handleSearch}
             type="text"
             placeholder="Search records..."
-            className="pr-[30px]"
+            className="pr-10 h-10 shadow-sm bg-background border-muted-foreground/20 focus-visible:ring-primary/20"
             defaultValue={currentSearch || ""}
           />
           <Search className="w-4 h-4 absolute text-muted-foreground right-3" />
         </div>
+
         {data?.length > 0 && (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
             {selectAction && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -305,17 +308,17 @@ export function DataTable<TData, TValue>({
                       isLoading
                         ? isLoading
                         : table.getFilteredSelectedRowModel().rows.length > 0
-                        ? false
-                        : true
+                          ? false
+                          : true
                     }
                     variant="outline"
-                    className="cursor-pointer"
+                    className="cursor-pointer shadow-sm border-muted-foreground/20"
+                    size="sm"
                   >
-                    Action ({table.getFilteredSelectedRowModel().rows.length}{" "}
-                    selected)
+                    Action ({table.getFilteredSelectedRowModel().rows.length})
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="start">
+                <DropdownMenuContent className="w-56" align="end">
                   {verifyData && (
                     <DropdownMenuItem
                       onClick={() => {
@@ -329,7 +332,7 @@ export function DataTable<TData, TValue>({
                       }}
                       className="cursor-pointer"
                     >
-                      <SquareCheckBig className="w-4 h-4" />
+                      <SquareCheckBig className="w-4 h-4 mr-2" />
                       <span>
                         Verify Data (
                         {table.getFilteredSelectedRowModel().rows.length} Plot)
@@ -345,9 +348,10 @@ export function DataTable<TData, TValue>({
                           .rows.map((r: any) => r.original.plotId);
                         saveToDatabase!(selectedPlotIds);
                       }}
+                      className="cursor-pointer"
                     >
                       <Tooltip>
-                        <TooltipTrigger className="flex items-center cursor-pointer">
+                        <TooltipTrigger className="flex items-center cursor-pointer w-full">
                           <Save className="w-4 h-4 mr-2" />
                           <span>Save to database</span>
                         </TooltipTrigger>
@@ -369,40 +373,40 @@ export function DataTable<TData, TValue>({
               variant={"greenOutline"}
               onClick={handleExportExcel}
               disabled={isExporting || isLoading}
-              className="cursor-pointer"
+              className="cursor-pointer shadow-sm"
+              size="sm"
             >
               {isExporting && <Dot className="h-8 w-8 animate-bounce" />}
-              {!isExporting && <FileSpreadsheet className="h-4 w-4" />}
-              <span>Export XLSX</span>
+              {!isExporting && <FileSpreadsheet className="h-4 w-4 mr-2" />}
+              <span>Export</span>
             </Button>
             <Button
               onClick={handleRefresh}
               variant="outline"
               disabled={isRefreshing || isLoading}
-              className="cursor-pointer"
+              className="cursor-pointer shadow-sm border-muted-foreground/20"
+              size="sm"
             >
               <RefreshCcw
-                className={cn("h-4 w-4", isRefreshing && "animate-spin")}
+                className={cn("h-4 w-4 mr-2", isRefreshing && "animate-spin")}
               />
               <span>Refresh</span>
             </Button>
             {addNewButtonTitle && (
-              <Button disabled={isLoading}>{addNewButtonTitle}</Button>
+              <Button disabled={isLoading} size="sm" className="shadow-sm">{addNewButtonTitle}</Button>
             )}
           </div>
         )}
       </div>
-      <div className="">
-        {/* <ScrollArea className="w-full"> */}
-        <Table className="relative border border-border ">
-          <TableHeader>
+
+      <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+        <Table className="relative">
+          <TableHeader className="bg-muted/40 hover:bg-muted/40">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="hover:bg-transparent border-b border-border">
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className="whitespace-nowrap">
-                    {isLoading ? (
-                      <Loader className="w-4 h-4 animate-spin" />
-                    ) : header.isPlaceholder ? null : (
+                  <TableHead key={header.id} className="whitespace-nowrap h-11 text-xs font-semibold uppercase tracking-wider ">
+                    {header.isPlaceholder ? null : (
                       flexRender(
                         header.column.columnDef.header,
                         header.getContext()
@@ -416,19 +420,16 @@ export function DataTable<TData, TValue>({
 
           <TableBody>
             {isLoading ? (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  <div className="flex items-center justify-center">
-                    <div className="flex flex-col items-center gap-3 justify-center">
-                      <Loader className="h-7 w-7 animate-spin" />
-                      <span>Load data...</span>
-                    </div>
-                  </div>
-                </TableCell>
-              </TableRow>
+              // Skeleton Loading
+              Array.from({ length: 5 }).map((_, rowIndex) => (
+                <TableRow key={`skeleton-row-${rowIndex}`} className="h-16">
+                  {columns.map((_, colIndex) => (
+                    <TableCell key={`skeleton-cell-${rowIndex}-${colIndex}`}>
+                      <Skeleton className="h-5 w-full rounded-md bg-muted/50" />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
             ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => {
                 const original = row.original as any;
@@ -436,25 +437,18 @@ export function DataTable<TData, TValue>({
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
-                    className={cn({
-                      "bg-indigo-500 text-white":
+                    className={cn("transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", {
+                      "bg-indigo-500/10 hover:bg-indigo-500/20":
                         rowColored === "plot" &&
                         original.verifyStatus === "MANUAL",
-                      "bg-amber-500 text-white":
-                        rowColored === "plot" &&
-                        original.verifyStatus === "MANUAL" &&
-                        original.complianceStatus === "NON_COMPLIANT",
-                      "hover:bg-indigo-300":
-                        rowColored === "plot" &&
-                        original.verifyStatus === "MANUAL",
-                      "hover:bg-amber-300":
+                      "bg-amber-500/10 hover:bg-amber-500/20":
                         rowColored === "plot" &&
                         original.verifyStatus === "MANUAL" &&
                         original.complianceStatus === "NON_COMPLIANT",
                     })}
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
+                      <TableCell key={cell.id} className="py-3">
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
@@ -468,44 +462,40 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-64 text-center"
                 >
-                  No results.
+                  <div className="flex flex-col items-center justify-center text-muted-foreground gap-2">
+                    <div className="bg-muted/30 p-4 rounded-full">
+                      <Inbox className="h-8 w-8 opacity-50" />
+                    </div>
+                    <span className="font-medium">No results found</span>
+                    <span className="text-xs text-muted-foreground/70 max-w-xs">
+                      Try adjusting your search or filter to find what you're looking for.
+                    </span>
+                  </div>
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
-
-        {/* <ScrollBar orientation="horizontal" />
-      </ScrollArea> */}
       </div>
 
-      <div className="flex flex-col items-center justify-end gap-2 space-x-2 py-2 sm:flex-row">
-        <div className="flex w-full items-center justify-between">
-          <div className="flex-1 text-sm text-muted-foreground">
+      <div className="flex flex-col items-center justify-end gap-2 space-x-2 py-4 sm:flex-row">
+        <div className="flex w-full items-center justify-between gap-4">
+          <div className="hidden sm:block flex-1 text-sm text-muted-foreground">
             {totalData > 0 ? (
-              <>
-                Showing {table.getRowModel().rows.length} of {totalData} entries
-              </>
+              <span className="bg-muted/30 px-2 py-1 rounded-md text-xs">
+                Showing <span className="font-medium text-foreground">{table.getRowModel().rows.length}</span> of <span className="font-medium text-foreground">{totalData}</span>
+              </span>
             ) : (
-              "No entries found"
+              ""
             )}
           </div>
+
           {/* Pagination hanya tampil kalau data lebih banyak dari satu halaman */}
-
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
+          <div className="flex flex-1 flex-col sm:flex-row items-center justify-end gap-4">
             <div className="flex items-center space-x-2">
-              {/* <p className='whitespace-nowrap text-sm font-medium'>
-                Rows per page
-              </p> */}
-              {table.getFilteredSelectedRowModel().rows.length > 0 && (
-                <div className="flex-1 text-sm text-muted-foreground">
-                  {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                  {table.getFilteredRowModel().rows.length} row(s) selected.
-                </div>
-              )}
-
+              <span className="text-xs text-muted-foreground hidden sm:inline-block">Rows per page</span>
               <Select
                 value={`${paginationState.pageSize}`}
                 defaultValue={`${LIMIT_DEFAULT}`}
@@ -513,7 +503,7 @@ export function DataTable<TData, TValue>({
                   handleChangeLimitWithValue(value);
                 }}
               >
-                <SelectTrigger className="h-8 w-[70px]">
+                <SelectTrigger className="h-8 w-[70px] bg-background border-muted-foreground/20">
                   <SelectValue placeholder={paginationState.pageSize} />
                 </SelectTrigger>
                 <SelectContent side="top">
@@ -525,78 +515,72 @@ export function DataTable<TData, TValue>({
                 </SelectContent>
               </Select>
             </div>
+
+            {totalData > limit && (
+              <Pagination className="justify-end w-auto mx-0">
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      size="sm"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (page > 1) handleChangePage(page - 1);
+                      }}
+                      className={
+                        page <= 1 ? "pointer-events-none opacity-50" : "cursor-pointer"
+                      }
+                    />
+                  </PaginationItem>
+
+                  {/* Angka + Ellipsis - Hidden on small screens if too many */}
+                  <div className="hidden sm:flex items-center">
+                    {range.map((it, idx) =>
+                      it === "…" ? (
+                        <PaginationItem key={`dots-${idx}`}>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      ) : (
+                        <PaginationItem key={it}>
+                          <PaginationLink
+                            size="sm"
+                            href="#"
+                            isActive={it === page}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (it !== page) handleChangePage(it);
+                            }}
+                          >
+                            {it}
+                          </PaginationLink>
+                        </PaginationItem>
+                      )
+                    )}
+                  </div>
+
+                  {/* Mobile simplified page indicator */}
+                  <div className="sm:hidden flex items-center px-2 text-sm">
+                    Page {page}
+                  </div>
+
+                  <PaginationItem>
+                    <PaginationNext
+                      size="sm"
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (page < totalPages) handleChangePage(page + 1);
+                      }}
+                      className={
+                        page >= totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"
+                      }
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            )}
           </div>
         </div>
-        {totalData > limit && (
-          <div className="block md:flex w-full items-center justify-center md:justify-between ">
-            <div className="flex-1 text-sm text-muted-foreground text-nowrap">
-              {totalData > 0 ? (
-                <>
-                  Page {paginationState.pageIndex + 1} of {table.getPageCount()}
-                </>
-              ) : (
-                "No pages"
-              )}
-            </div>
-
-            <Pagination className="justify-end">
-              <PaginationContent>
-                {/* Prev */}
-                <PaginationItem>
-                  <PaginationPrevious
-                    size="sm"
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (page > 1) handleChangePage(page - 1);
-                    }}
-                    className={
-                      page <= 1 ? "pointer-events-none opacity-50" : ""
-                    }
-                  />
-                </PaginationItem>
-
-                {/* Angka + Ellipsis */}
-                {range.map((it, idx) =>
-                  it === "…" ? (
-                    <PaginationItem key={`dots-${idx}`}>
-                      <PaginationEllipsis />
-                    </PaginationItem>
-                  ) : (
-                    <PaginationItem key={it}>
-                      <PaginationLink
-                        size="sm"
-                        href="#"
-                        isActive={it === page}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (it !== page) handleChangePage(it);
-                        }}
-                      >
-                        {it}
-                      </PaginationLink>
-                    </PaginationItem>
-                  )
-                )}
-
-                {/* Next */}
-                <PaginationItem>
-                  <PaginationNext
-                    size="sm"
-                    href="#"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (page < totalPages) handleChangePage(page + 1);
-                    }}
-                    className={
-                      page >= totalPages ? "pointer-events-none opacity-50" : ""
-                    }
-                  />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </div>
-        )}
       </div>
     </>
   );

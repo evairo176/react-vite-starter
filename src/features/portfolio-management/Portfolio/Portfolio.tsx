@@ -1,4 +1,4 @@
-import { Loader, MoreVertical, Plus, Trash } from "lucide-react";
+import { Eye, Loader, MoreVertical, Plus, Trash } from "lucide-react";
 
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
@@ -20,6 +20,7 @@ import { DataTable } from "@/shared/table/data-table";
 import usePortfolio from "./usePortfolio";
 import type { IPPortfolio } from "@/core/types/portfolio.type";
 import AddModal from "./AddModal";
+import DetailModal from "./DetailModal";
 
 const Portfolio = () => {
   const {
@@ -33,6 +34,8 @@ const Portfolio = () => {
   } = usePortfolio();
 
   const [addModal, setAddModal] = useState(false);
+  const [detailModal, setDetailModal] = useState(false);
+  const [id, setId] = useState<string>("")
 
   const columns: ColumnDef<IPPortfolio>[] = [
     {
@@ -137,6 +140,18 @@ const Portfolio = () => {
               >
                 <Trash className="text-red-500" /> Revoke Portfolio
               </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  const data =
+                    dataPortfolio?.data?.find(
+                      (row: IPPortfolio) => row.id === table.id
+                    ) || null;
+                  setId(data?.id as string);
+                  setDetailModal(true)
+                }}
+              >
+                <Eye className="text-blue-500" /> Detail Portfolio
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );
@@ -179,6 +194,13 @@ const Portfolio = () => {
         data={selected}
         refetch={refetchPortfolio}
       />
+      {
+        id && <DetailModal
+          open={detailModal}
+          setOpen={setDetailModal}
+          id={id}
+        />
+      }
     </div>
   );
 };
