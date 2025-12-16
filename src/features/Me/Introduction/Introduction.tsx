@@ -32,15 +32,17 @@ const Introduction = () => {
             Lokasi di Indramayu, Jawa Barat <span className="ml-1">🇮🇩</span>
           </li>
         </ul>
-        <p className="leading-[1.8] md:leading-loose text-neutral-800 dark:text-neutral-300">
-          Saya adalah seorang Fullstack Developer berusia 23 tahun dengan
-          pengalaman lebih dari 1,5 tahun. Keahlian saya mencakup pengembangan
-          aplikasi web dan mobile menggunakan React, TypeScript, dan Laravel.
-          Saya memiliki fokus kuat terhadap pengembangan end-to-end, mulai dari
-          desain antarmuka hingga pengembangan backend, sehingga memastikan
-          pengalaman pengguna yang mulus dan efisien. Dengan keinginan untuk
-          terus belajar dan berinovasi, saya siap untuk memberikan kontribusi
-          positif dalam proyek pengembangan perangkat lunak.
+        <p className="leading-[1.8] md:leading-loose text-neutral-800 dark:text-neutral-300 text-justify">
+          Saya merupakan seorang Full-Stack Developer dengan pengalaman dalam
+          merancang, mengembangkan, dan memelihara aplikasi berbasis web secara
+          menyeluruh, mencakup pengelolaan database, pengembangan backend dan
+          frontend, serta integrasi sistem. Saya memiliki kompetensi dalam
+          menggunakan berbagai teknologi seperti Next.js, React, Express,
+          Laravel, dan .NET, serta basis data SQL dan NoSQL untuk mendukung
+          pengembangan sistem yang andal dan terstruktur. Dengan komitmen
+          terhadap kualitas kode, keamanan aplikasi, dan efisiensi sistem, saya
+          terbiasa mengimplementasikan solusi teknologi yang selaras dengan
+          kebutuhan bisnis dan standar pengembangan perangkat lunak profesional.
         </p>
       </div>
     </section>

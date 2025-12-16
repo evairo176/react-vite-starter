@@ -7,7 +7,7 @@ import {
   AiOutlineDashboard,
 } from "react-icons/ai";
 import { GoTasklist } from "react-icons/go";
-import { SiAboutdotme } from "react-icons/si";
+import { SiAboutdotme, SiEducative } from "react-icons/si";
 import { MdOutlineContacts } from "react-icons/md";
 
 import { BiLogoPostgresql } from "react-icons/bi";
@@ -42,9 +42,12 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiVite,
-  SiZod,
 } from "react-icons/si";
+import { HiAcademicCap, HiBriefcase } from "react-icons/hi";
+
 import { Icons } from "@/shared/icons/shadcn-ui";
+const iconSize = 25;
+
 export const MENU = [
   {
     title: "Home",
@@ -92,7 +95,7 @@ export const MENU = [
     url: "/dashboard",
   },
 ];
-const iconSize = 25;
+
 export const STACKS = [
   {
     name: "PHP",
@@ -249,5 +252,46 @@ export const STACKS = [
   {
     name: "Midtrans",
     icon: <Icons.midtrans className={`h-[${iconSize}px] w-[${iconSize}px]`} />,
+  },
+];
+
+export const CAREER = [
+  {
+    title: `Full-Stack Developer KPN Plantation`,
+    desc: `Bertanggung jawab mengembangkan dan memelihara aplikasi web dan sistem internal perusahaan, mencakup perancangan database, pengembangan frontend dan backend, integrasi IoT, serta integrasi sistem enterprise seperti SAP.`,
+    location: "Jakarta Selatan, Jakarta",
+    startYear: "Agu 2023",
+    endYear: "Sekarang",
+    icon: HiBriefcase,
+    highlight: true,
+  },
+  {
+    title: `Full-Stack Developer Frelance`,
+    desc: `Pengalaman freelance memungkinkan saya bekerja secara mandiri dalam menangani berbagai proyek dengan tanggung jawab penuh, mulai dari perencanaan hingga penyelesaian. Saya terbiasa beradaptasi dengan kebutuhan proyek yang beragam, berkomunikasi secara efektif, serta memberikan solusi teknis yang tepat dan efisien untuk mencapai tujuan yang ditetapkan.`,
+    location: "WFH, Kerja dari rumah",
+    startYear: "Juli 2023",
+    endYear: "Agu 2024",
+    icon: HiBriefcase,
+    highlight: false,
+  },
+  {
+    title: `Full-Stack Developer 
+PT. Xtreme Network Sistem`,
+    desc: `Mengembangkan aplikasi web berbasis React dan Laravel, termasuk fitur integrasi Google Maps, payment gateway Xendit, serta pengelolaan dashboard dengan sistem notifikasi dan email terintegrasi.`,
+    location: "Jakarta Selatan, Jakarta",
+    startYear: "Okt 2022",
+    endYear: "Jul 2023",
+    icon: HiBriefcase,
+    highlight: false,
+  },
+  {
+    title: `Studi Diploma 3
+Politeknik Negeri Indramayu`,
+    desc: `Saya lulus setelah 3 tahun belajar. Saya segera mendapatkan pekerjaan sebagai pengembang full-stack.`,
+    location: "Indramayu, Jawa Barat",
+    startYear: "Sep 2019",
+    endYear: "Okt 2022",
+    icon: HiAcademicCap,
+    highlight: false,
   },
 ];

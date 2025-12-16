@@ -15,7 +15,7 @@ import Image from "@/features/portfolio-management/Image";
 import Portfolio from "@/features/portfolio-management/Portfolio";
 import Home from "@/features/dashboard/Home";
 import Me from "@/features/Me";
-import HomeLayout from "../layouts/HomeLayout";
+import HomeLayout from "../layouts/HomeLayout/HomeLayout";
 
 const router = createBrowserRouter([
   // 🔹 USER BELUM LOGIN

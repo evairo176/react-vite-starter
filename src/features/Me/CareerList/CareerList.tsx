@@ -11,6 +11,7 @@ import { useTheme } from "@/core/providers/theme-provider";
 import SectionHeading from "@/shared/SectionHeading";
 import SectionSubHeading from "@/shared/SectionSubHeading";
 import { Home } from "lucide-react";
+import { CAREER } from "@/app/layouts/HomeLayout/constant";
 
 interface CareerListInterface {}
 
@@ -46,41 +47,45 @@ const CareerList = ({}: CareerListInterface) => {
           </Button>
         </SectionSubHeading>
         <VerticalTimeline lineColor="var(--muted)">
-          {[1, 2, 3, 4].map((row) => (
-            <VerticalTimelineElement
-              key={row}
-              visible
-              contentStyle={{
-                background: "var(--muted)",
-                boxShadow: "none",
-                border: "1px solid rgba(0,0,0,0.05)",
-                textAlign: "left",
-                padding: "1.3rem 2rem",
-              }}
-              contentArrowStyle={{
-                borderRight: "var(--muted)",
-              }}
-              iconStyle={{
-                background: "var(--muted)",
-                fontSize: "1.5rem",
-                marginRight: "20px",
-              }}
-              date="Sep 2019 - Okt 2022"
-              dateClassName="md:mx-3 text-muted-foreground"
-              icon={<Home />}
-            >
-              <h3 className="font-semibold capitalize">
-                Studi Diploma 3 Politeknik Negeri Indramayu
-              </h3>
+          {CAREER.map((row) => {
+            const Icon = row.icon;
+            return (
+              <VerticalTimelineElement
+                key={row.title}
+                visible
+                contentStyle={{
+                  background: "var(--muted)",
+                  boxShadow: "none",
+                  border: `1px solid ${
+                    row.highlight ? "#05df72" : "rgba(0,0,0,0.05)"
+                  }`,
+                  textAlign: "left",
+                  padding: "1.3rem 2rem",
+                }}
+                contentArrowStyle={{
+                  borderRight: "var(--muted)",
+                }}
+                iconStyle={{
+                  background: `${row.highlight ? "#05df72" : "var(--muted)"}`,
+                  fontSize: "1.5rem",
+                  marginRight: "20px",
+                }}
+                date={`${row.startYear} - ${row.endYear}`}
+                dateClassName="md:mx-3 text-muted-foreground"
+                icon={<Icon />}
+              >
+                <h3 className="font-semibold capitalize">{row.title}</h3>
 
-              <p className="text-sm text-muted-foreground !mt-0">Jawa Barat</p>
+                <p className="text-sm text-muted-foreground !mt-0">
+                  {row.location}
+                </p>
 
-              <p className="mt-1 text-sm text-muted-foreground text-justify">
-                Saya lulus setelah 3 tahun belajar. Saya segera mendapatkan
-                pekerjaan sebagai pengembang full-stack.
-              </p>
-            </VerticalTimelineElement>
-          ))}
+                <p className="mt-1 text-sm text-muted-foreground text-justify">
+                  {row.desc}
+                </p>
+              </VerticalTimelineElement>
+            );
+          })}
         </VerticalTimeline>
       </div>
     </section>

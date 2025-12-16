@@ -1,6 +1,6 @@
 "use client";
 
-import { STACKS } from "@/app/layouts/constant";
+import { STACKS } from "@/app/layouts/HomeLayout/constant";
 import { motion } from "framer-motion";
 
 type Props = {};
