@@ -23,6 +23,7 @@ import AddModal from "./AddModal";
 import DetailModal from "./DetailModal";
 import EditModal from "./EditModal/EditModal";
 import { TagsInput } from "@/shared/tag-input";
+import SEO from "@/components/shared/SEO";
 
 const Portfolio = () => {
   const {
@@ -176,6 +177,7 @@ const Portfolio = () => {
 
   return (
     <div className="md:p-6 p-4">
+      <SEO title="Portfolio" description="Manage and review Portfolio data for companies within the system" />
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-2xl font-bold">Portfolio management</h1>

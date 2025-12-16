@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Layers, Tags, Cpu, Briefcase, TrendingUp } from "lucide-react";
+import SEO from "@/components/shared/SEO";
 
 export default function Home() {
   const { data: analytics, isLoading } = useQuery({
@@ -34,6 +35,7 @@ export default function Home() {
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <SEO title="Dashboard" description="Overview of your portfolio analytics and content distribution." />
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
