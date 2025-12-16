@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://react-vite-starter-beta.vercel.app/sitemap.xml
