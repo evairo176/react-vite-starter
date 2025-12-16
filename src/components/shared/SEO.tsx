@@ -1,38 +1,53 @@
-import { Helmet } from 'react-helmet-async';
+import { useEffect } from "react";
 
 interface SEOProps {
-    title: string;
-    description?: string;
-    name?: string;
-    type?: string;
+  title: string;
+  description?: string;
+  name?: string;
+  type?: string;
 }
 
 export default function SEO({
-    title,
-    description = "Manage your portfolio with ease.",
-    name = "Portfolio Manager",
-    type = "website"
+  title,
+  description = "Manage your portfolio with ease.",
+  name = "Portfolio Manager",
+  type = "website",
 }: SEOProps) {
-    return (
-        <Helmet>
-            {/* Standard metadata tags */}
-            <title>{title} | {name}</title>
-            <meta name='description' content={description} />
+  useEffect(() => {
+    // Update Title
+    document.title = `${title} | ${name}`;
 
-            {/* End standard metadata tags */}
+    // Helper to update or create meta tags
+    const updateMeta = (selector: string, attribute: string, value: string) => {
+      let meta = document.querySelector(selector);
+      if (!meta) {
+        meta = document.createElement("meta");
+        // Parse selector to set attributes (simple support for name/property)
+        if (selector.includes('[name="')) {
+          meta.setAttribute('name', selector.match(/name="([^"]+)"/)?.[1] || '');
+        } else if (selector.includes('[property="')) {
+          meta.setAttribute('property', selector.match(/property="([^"]+)"/)?.[1] || '');
+        }
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute(attribute, value);
+    };
 
-            {/* Facebook tags */}
-            <meta property="og:type" content={type} />
-            <meta property="og:title" content={title} />
-            <meta property="og:description" content={description} />
-            {/* End Facebook tags */}
+    // Update Meta Description
+    updateMeta('meta[name="description"]', 'content', description);
 
-            {/* Twitter tags */}
-            <meta name="twitter:creator" content={name} />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={title} />
-            <meta name="twitter:description" content={description} />
-            {/* End Twitter tags */}
-        </Helmet>
-    );
+    // Facebook / Open Graph
+    updateMeta('meta[property="og:type"]', 'content', type);
+    updateMeta('meta[property="og:title"]', 'content', `${title} | ${name}`);
+    updateMeta('meta[property="og:description"]', 'content', description);
+
+    // Twitter
+    updateMeta('meta[name="twitter:creator"]', 'content', name);
+    updateMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
+    updateMeta('meta[name="twitter:title"]', 'content', `${title} | ${name}`);
+    updateMeta('meta[name="twitter:description"]', 'content', description);
+
+  }, [title, description, name, type]);
+
+  return null;
 }
