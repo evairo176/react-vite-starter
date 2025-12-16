@@ -2,14 +2,7 @@ import QueryClientProvider from "@/core/providers/query-provider";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,

@@ -14,6 +14,8 @@ import TechStack from "@/features/portfolio-management/TechStack";
 import Image from "@/features/portfolio-management/Image";
 import Portfolio from "@/features/portfolio-management/Portfolio";
 import Home from "@/features/dashboard/Home";
+import Me from "@/features/Me";
+import HomeLayout from "../layouts/HomeLayout";
 
 const router = createBrowserRouter([
   // 🔹 USER BELUM LOGIN
@@ -25,8 +27,15 @@ const router = createBrowserRouter([
       {
         element: <AuthLayout />,
         children: [
-          { path: "/", element: <div>dwd</div> },
           { path: "/login", element: <Login /> },
+          { path: "*", element: <NotFound /> },
+        ],
+      },
+      {
+        element: <HomeLayout />,
+        children: [
+          { path: "/", element: <Me /> },
+          { path: "/projects", element: <div>projects</div> },
           { path: "*", element: <NotFound /> },
         ],
       },
