@@ -1,6 +1,6 @@
 import type { IPCategory } from "./category.type";
 import type { IPTag } from "./tag.type";
-import type { IPTechStack } from "./textStack.type";
+import type { IPTechStack } from "./techStack.type";
 import { z } from "zod";
 
 export interface IPPortfolio {
@@ -57,15 +57,15 @@ export const CreatePortfolioSchema = z.object({
 
   categoryId: z.string().optional(),
 
-  liveUrl: z.string().url().optional(),
-  repoUrl: z.string().url().optional(),
+  liveUrl: z.string().nullable().optional(),
+  repoUrl: z.string().nullable().optional(),
 
   featured: z.boolean(),
   isPublished: z.boolean(),
 
   images: z.array(PortfolioImageSchema).optional(),
-  tagIds: z.array(z.string()).optional(),
-  techIds: z.array(z.string()).optional(),
+  tagIds: z.array(z.string().min(1)).min(1, "Minimal 1 tag"),
+  techIds: z.array(z.string().min(1)).min(1, "Minimal 1 tech"),
 });
 
 export const UpdatePortfolioSchema = CreatePortfolioSchema.partial().extend({

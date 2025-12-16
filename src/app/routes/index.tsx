@@ -13,7 +13,7 @@ import Tag from "@/features/portfolio-management/Tag";
 import TechStack from "@/features/portfolio-management/TechStack";
 import Image from "@/features/portfolio-management/Image";
 import Portfolio from "@/features/portfolio-management/Portfolio";
-import Home from "@/features/Home";
+import Home from "@/features/dashboard/Home";
 
 const router = createBrowserRouter([
   // 🔹 USER BELUM LOGIN
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       {
         element: <AuthLayout />,
         children: [
-          { path: "/", element: <Home /> },
+          { path: "/", element: <div>dwd</div> },
           { path: "/login", element: <Login /> },
           { path: "*", element: <NotFound /> },
         ],

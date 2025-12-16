@@ -21,6 +21,8 @@ import usePortfolio from "./usePortfolio";
 import type { IPPortfolio } from "@/core/types/portfolio.type";
 import AddModal from "./AddModal";
 import DetailModal from "./DetailModal";
+import EditModal from "./EditModal/EditModal";
+import { TagsInput } from "@/shared/tag-input";
 
 const Portfolio = () => {
   const {
@@ -34,8 +36,9 @@ const Portfolio = () => {
   } = usePortfolio();
 
   const [addModal, setAddModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   const [detailModal, setDetailModal] = useState(false);
-  const [id, setId] = useState<string>("")
+  const [id, setId] = useState<string>("");
 
   const columns: ColumnDef<IPPortfolio>[] = [
     {
@@ -146,8 +149,20 @@ const Portfolio = () => {
                     dataPortfolio?.data?.find(
                       (row: IPPortfolio) => row.id === table.id
                     ) || null;
+                  setSelected(data);
+                  setEditModal(true);
+                }}
+              >
+                <Eye className="text-amber-500" /> Edit Portfolio
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  const data =
+                    dataPortfolio?.data?.find(
+                      (row: IPPortfolio) => row.id === table.id
+                    ) || null;
                   setId(data?.id as string);
-                  setDetailModal(true)
+                  setDetailModal(true);
                 }}
               >
                 <Eye className="text-blue-500" /> Detail Portfolio
@@ -161,21 +176,28 @@ const Portfolio = () => {
 
   return (
     <div className="md:p-6 p-4">
-      <h1 className="text-2xl font-bold">Portfolio management</h1>
-      <p>Manage and review Portfolio data for companies within the system</p>
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <h1 className="text-2xl font-bold">Portfolio management</h1>
+          <p>
+            Manage and review Portfolio data for companies within the system
+          </p>
+        </div>
+
+        <Button
+          onClick={() => {
+            setAddModal(true);
+          }}
+        >
+          {" "}
+          <Plus className="w-4 h-4 mr-2" />
+          Tambah Portfolio
+        </Button>
+      </div>
+
       <div className="w-full grid gap-2 relative overflow-x-hidden">
         <Card className="mt-3">
           <CardContent>
-            <div className="mb-4 flex items-center justify-end">
-              <Button
-                onClick={() => {
-                  setAddModal(true);
-                }}
-                variant={"blueOutline"}
-              >
-                Tambah Portfolio
-              </Button>
-            </div>
             <DataTable
               totalPages={dataPortfolio?.metadata?.totalPages}
               totalData={dataPortfolio?.metadata?.total}
@@ -194,13 +216,15 @@ const Portfolio = () => {
         data={selected}
         refetch={refetchPortfolio}
       />
-      {
-        id && <DetailModal
-          open={detailModal}
-          setOpen={setDetailModal}
-          id={id}
-        />
-      }
+      {id && (
+        <DetailModal open={detailModal} setOpen={setDetailModal} id={id} />
+      )}
+      <EditModal
+        open={editModal}
+        setOpen={setEditModal}
+        data={selected}
+        refetch={refetchPortfolio}
+      />
     </div>
   );
 };

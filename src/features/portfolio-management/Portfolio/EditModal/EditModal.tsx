@@ -1,4 +1,4 @@
-import useAddModal from "./useAddModal";
+import useEditModal from "./useEditModal";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,7 +23,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import SearchableSelect from "@/shared/searchable-select";
-import SearchableMultiSelect from "@/shared/searchable-mutiple-select";
 import type { IPCategory } from "@/core/types/category.type";
 import {
   Type,
@@ -42,54 +41,47 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import { TagsInput } from "@/shared/tag-input";
-import type { IPTechStack } from "@/core/types/techStack.type";
 
-type AddModalModalProps = {
+type EditModalProps = {
   open: boolean;
   setOpen: (open: boolean) => void;
   data: any | null;
   refetch: () => void;
 };
 
-export default function AddModal({
+export default function EditModal({
   open,
   setOpen,
   data,
   refetch,
-}: AddModalModalProps) {
-  const {
-    form,
-    handleSubmit,
-
-    isPendingMutateSaveToDatabase,
-    // isSuccessMutateSaveToDatabase
-
-    dataCategory,
-    dataTag,
-    dataTech,
-  } = useAddModal({
-    close: () => {
-      setOpen(false);
-      refetch();
-    },
-  });
+}: EditModalProps) {
+  const { form, handleSubmit, isPendingMutateSaveToDatabase, dataCategory } =
+    useEditModal({
+      close: () => {
+        setOpen(false);
+        refetch();
+      },
+      data,
+    });
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: "images",
   });
 
-  const formId = "addModal";
+  const formId = "editModal";
+
+  console.log({ form: form.formState.errors });
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-7xl w-full h-[90vh] flex flex-col p-0 gap-0 overflow-hidden sm:rounded-2xl">
         <DialogHeader className="px-6 py-4 border-b border-border/40 bg-muted/20 shrink-0">
           <DialogTitle className="text-xl font-semibold tracking-tight text-foreground/90">
-            Tambah Portfolio
+            Edit Portfolio
           </DialogTitle>
           <DialogDescription className="text-muted-foreground">
-            Make your portfolio stand out with detailed information.
+            Update your portfolio information.
           </DialogDescription>
         </DialogHeader>
 
@@ -350,7 +342,7 @@ export default function AddModal({
                           </FormLabel>
                           <FormControl>
                             <TagsInput
-                              value={field.value}
+                              value={field.value || []}
                               onChange={field.onChange}
                               placeholder="Type tag & press Enter"
                             />
@@ -370,7 +362,7 @@ export default function AddModal({
                           </FormLabel>
                           <FormControl>
                             <TagsInput
-                              value={field.value}
+                              value={field.value || []}
                               onChange={field.onChange}
                               placeholder="Type tech & press Enter"
                             />
@@ -474,7 +466,7 @@ export default function AddModal({
             ) : (
               <>
                 <Save className="w-4 h-4" />
-                Save Project
+                Update Project
               </>
             )}
           </Button>

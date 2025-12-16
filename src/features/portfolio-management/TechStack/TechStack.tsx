@@ -1,37 +1,16 @@
-import { Loader, MoreVertical, Plus, Trash } from "lucide-react";
-
-import { MoreHorizontal } from "lucide-react";
-import { useState } from "react";
-
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/shared/table/data-table-column-header";
-import { fmtDate } from "@/core/utils/date";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTable } from "@/shared/table/data-table";
-import UserAgentCell from "@/shared/user-agent-cell";
-import ExpiredAtCell from "@/shared/expired-at-cell";
-import IsCurrentCell from "@/shared/is-current-cell";
-import IsRevokedCell from "@/shared/is-revoke-cell";
 import useTechStack from "./useTechStack";
-import type { IPTechStack } from "@/core/types/textStack.type";
+import type { IPTechStack } from "@/core/types/techStack.type";
 
 const TechStack = () => {
   const {
     dataTechStack,
     isLoadingTechStack,
-    isRefetchingTechStack,
-    refetchTechStack,
 
-    selected,
-    setSelected,
+    refetchTechStack,
   } = useTechStack();
 
   const columns: ColumnDef<IPTechStack>[] = [
@@ -65,7 +44,7 @@ const TechStack = () => {
     {
       accessorKey: "icon",
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Slug" />
+        <DataTableColumnHeader column={column} title="Icon" />
       ),
       cell: ({ row }) => {
         const table: any = row.original;

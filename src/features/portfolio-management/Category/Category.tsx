@@ -1,8 +1,6 @@
-import { Loader, MoreVertical, Plus, Trash } from "lucide-react";
-
+import { Pencil, Plus, Trash } from "lucide-react";
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
-
 import type { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "@/shared/table/data-table-column-header";
 import { fmtDate } from "@/core/utils/date";
@@ -16,23 +14,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DataTable } from "@/shared/table/data-table";
-import UserAgentCell from "@/shared/user-agent-cell";
-import ExpiredAtCell from "@/shared/expired-at-cell";
-import IsCurrentCell from "@/shared/is-current-cell";
-import IsRevokedCell from "@/shared/is-revoke-cell";
 import useCategory from "./useCategory";
 import type { IPCategory } from "@/core/types/category.type";
+import AddModal from "./AddModal/AddModal";
+import EditModal from "./EditModal/EditModal";
 
 const Category = () => {
   const {
     dataCategory,
     isLoadingCategory,
-    isRefetchingCategory,
     refetchCategory,
-
-    selected,
-    setSelected,
   } = useCategory();
+
+  const [addModal, setAddModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [selected, setSelected] = useState<IPCategory | null>(null);
 
   const columns: ColumnDef<IPCategory>[] = [
     {
@@ -42,10 +38,9 @@ const Category = () => {
       ),
       cell: ({ row }) => {
         const table = row.original;
-
         return <div className="text-left font-medium">{table.id}</div>;
       },
-      accessorFn: (row) => row.id, // fallback
+      accessorFn: (row) => row.id,
       enableSorting: false,
       enableHiding: true,
     },
@@ -56,7 +51,6 @@ const Category = () => {
       ),
       cell: ({ row }) => {
         const table: any = row.original;
-
         return <div className="text-left font-medium">{table.name}</div>;
       },
       enableSorting: false,
@@ -69,13 +63,11 @@ const Category = () => {
       ),
       cell: ({ row }) => {
         const table: any = row.original;
-
         return <div className="text-left font-medium">{table.slug}</div>;
       },
       enableSorting: false,
       enableHiding: true,
     },
-
     {
       accessorKey: "updatedAt",
       header: ({ column }) => (
@@ -83,7 +75,6 @@ const Category = () => {
       ),
       cell: ({ row }) => {
         const table: any = row.original;
-
         return (
           <div className="text-left text-sm font-medium">
             {fmtDate(table.updatedAt)}
@@ -93,62 +84,63 @@ const Category = () => {
       enableSorting: true,
       enableHiding: true,
     },
-    // {
-    //   id: "actions",
-    //   enableHiding: false,
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const table = row.original;
 
-    //   cell: ({ row }) => {
-    //     const table = row.original;
-
-    //     if (table.isCurrent || table.isRevoke) {
-    //       return (
-    //         <DropdownMenu>
-    //           <DropdownMenuTrigger asChild>
-    //             <Button variant="ghost" className="h-8 w-8 p-0">
-    //               <span className="sr-only">Open menu</span>
-    //               <MoreHorizontal />
-    //             </Button>
-    //           </DropdownMenuTrigger>
-    //           <DropdownMenuContent align="end">
-    //             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-    //           </DropdownMenuContent>
-    //         </DropdownMenu>
-    //       );
-    //     }
-
-    //     return (
-    //       <DropdownMenu>
-    //         <DropdownMenuTrigger asChild>
-    //           <Button variant="ghost" className="h-8 w-8 p-0">
-    //             <span className="sr-only">Open menu</span>
-    //             <MoreHorizontal />
-    //           </Button>
-    //         </DropdownMenuTrigger>
-    //         <DropdownMenuContent align="end">
-    //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-    //           <DropdownMenuItem
-    //             onClick={() => {
-    //               const data =
-    //                 dataCategory?.data?.find(
-    //                   (row: IPCategory) => row.id === table.id
-    //                 ) || null;
-    //               setSelected(data);
-    //               setRevokeModal(true);
-    //             }}
-    //           >
-    //             <Trash className="text-red-500" /> Revoke Category
-    //           </DropdownMenuItem>
-    //         </DropdownMenuContent>
-    //       </DropdownMenu>
-    //     );
-    //   },
-    // },
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => {
+                  const data =
+                    dataCategory?.data?.find(
+                      (row: IPCategory) => row.id === table.id
+                    ) || null;
+                  setSelected(data);
+                  setEditModal(true);
+                }}
+              >
+                <Pencil className="w-4 h-4 mr-2" />
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  // TODO: Implement delete
+                }}
+              >
+                <Trash className="w-4 h-4 mr-2 text-red-500" />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
   ];
 
   return (
     <div className="md:p-6 p-4">
-      <h1 className="text-2xl font-bold">Category management</h1>
-      <p>Manage and review Category data for companies within the system</p>
+      <div className="flex justify-between items-center mb-4">
+        <div>
+          <h1 className="text-2xl font-bold">Category management</h1>
+          <p className="text-muted-foreground">Manage and review Category data</p>
+        </div>
+        <Button onClick={() => setAddModal(true)}>
+          <Plus className="w-4 h-4 mr-2" />
+          Add Category
+        </Button>
+      </div>
+
       <div className="w-full grid gap-2 relative overflow-x-hidden">
         <Card className="mt-3">
           <CardContent>
@@ -164,12 +156,18 @@ const Category = () => {
           </CardContent>
         </Card>
       </div>
-      {/* <RevokeModal
-        open={revokeModal}
-        setOpen={setRevokeModal}
+
+      <AddModal
+        open={addModal}
+        setOpen={setAddModal}
+        refetch={refetchCategory}
+      />
+      <EditModal
+        open={editModal}
+        setOpen={setEditModal}
         data={selected}
         refetch={refetchCategory}
-      /> */}
+      />
     </div>
   );
 };
