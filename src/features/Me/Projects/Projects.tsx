@@ -32,7 +32,7 @@ const Projects = () => {
                   title={row.title}
                   description={row.shortDesc}
                   imageUrl={row?.images?.length > 0 ? row?.images[0]?.url : ""}
-                  tags={row?.tags?.map((row: any) => row?.tag?.name)}
+                  tags={row?.techStacks?.map((row: any) => row?.tech?.name)}
                   link={row.liveUrl}
                 />
               );
