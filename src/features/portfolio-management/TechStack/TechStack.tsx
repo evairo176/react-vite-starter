@@ -1,7 +1,7 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "@/shared/table/data-table-column-header";
+import { DataTableColumnHeader } from "@/components/shared/table/data-table-column-header";
 import { Card, CardContent } from "@/components/ui/card";
-import { DataTable } from "@/shared/table/data-table";
+import { DataTable } from "@/components/shared/table/data-table";
 import useTechStack from "./useTechStack";
 import type { IPTechStack } from "@/core/types/techStack.type";
 

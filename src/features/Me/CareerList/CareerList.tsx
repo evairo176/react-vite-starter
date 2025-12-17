@@ -8,8 +8,8 @@ import { IoIosDownload } from "react-icons/io";
 
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/core/providers/theme-provider";
-import SectionHeading from "@/shared/SectionHeading";
-import SectionSubHeading from "@/shared/SectionSubHeading";
+import SectionHeading from "@/components/shared/SectionHeading";
+import SectionSubHeading from "@/components/shared/SectionSubHeading";
 import { Home } from "lucide-react";
 import { CAREER } from "@/app/layouts/HomeLayout/constant";
 

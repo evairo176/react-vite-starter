@@ -45,7 +45,7 @@ import {
 } from "react-icons/si";
 import { HiAcademicCap, HiBriefcase } from "react-icons/hi";
 
-import { Icons } from "@/shared/icons/shadcn-ui";
+import { Icons } from "@/components/shared/icons/shadcn-ui";
 const iconSize = 25;
 
 export const MENU = [

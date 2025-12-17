@@ -5,7 +5,7 @@ import { useState } from "react";
 import useSession from "./useSession";
 import type { IPSession } from "@/core/types/session.type";
 import type { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "@/shared/table/data-table-column-header";
+import { DataTableColumnHeader } from "@/components/shared/table/data-table-column-header";
 import { fmtDate } from "@/core/utils/date";
 import {
   DropdownMenu,
@@ -16,12 +16,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { DataTable } from "@/shared/table/data-table";
-import LoaderAnimation from "@/shared/loader-animation";
-import UserAgentCell from "@/shared/user-agent-cell";
-import ExpiredAtCell from "@/shared/expired-at-cell";
-import IsCurrentCell from "@/shared/is-current-cell";
-import IsRevokedCell from "@/shared/is-revoke-cell";
+import { DataTable } from "@/components/shared/table/data-table";
+import LoaderAnimation from "@/components/shared/loader-animation";
+import UserAgentCell from "@/components/shared/user-agent-cell";
+import ExpiredAtCell from "@/components/shared/expired-at-cell";
+import IsCurrentCell from "@/components/shared/is-current-cell";
+import IsRevokedCell from "@/components/shared/is-revoke-cell";
 import RevokeModal from "./RevokeModal";
 
 const Session = () => {

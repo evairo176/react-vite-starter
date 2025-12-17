@@ -9,7 +9,8 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import DynamicBreadcrumb from "@/shared/dynamic-breadcrumb";
+import DynamicBreadcrumb from "@/components/shared/dynamic-breadcrumb";
+import { ThemeCustomizer } from "@/components/shared/ThemeCustomizer";
 
 const DashboardLayout = () => {
   return (
@@ -48,19 +49,7 @@ const DashboardLayout = () => {
 
               {/* kanan: contoh slot untuk search / actions (glassy button) */}
               <div className="ml-auto flex items-center gap-2 pr-2">
-                {/* contoh button glass kecil */}
-                <button
-                  className="
-                    hidden sm:inline-flex items-center px-3 py-1.5 rounded-md text-sm
-                    bg-white/20 dark:bg-slate-700/30 backdrop-blur-sm
-                    border border-white/5 dark:border-slate-700/30
-                    hover:bg-white/30 dark:hover:bg-slate-700/40
-                    transition
-                  "
-                  aria-label="Quick action"
-                >
-                  Quick action
-                </button>
+                <ThemeCustomizer />
               </div>
             </div>
           </header>

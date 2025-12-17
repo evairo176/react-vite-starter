@@ -1,7 +1,7 @@
-import SectionHeading from "@/shared/SectionHeading";
+import SectionHeading from "@/components/shared/SectionHeading";
 import Skill from "./Skill/Skill";
 import { GiSkills } from "react-icons/gi";
-import SectionSubHeading from "@/shared/SectionSubHeading";
+import SectionSubHeading from "@/components/shared/SectionSubHeading";
 
 type Props = {};
 

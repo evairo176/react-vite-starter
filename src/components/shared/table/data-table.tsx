@@ -401,9 +401,9 @@ export function DataTable<TData, TValue>({
 
       <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
         <Table className="relative">
-          <TableHeader className="bg-muted/40 hover:bg-muted/40">
+          <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="hover:bg-transparent border-b border-border">
+              <TableRow key={headerGroup.id} >
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id} className="whitespace-nowrap h-11 text-xs font-semibold uppercase tracking-wider ">
                     {header.isPlaceholder ? null : (

@@ -1,8 +1,8 @@
-import SectionHeading from "@/shared/SectionHeading";
+import SectionHeading from "@/components/shared/SectionHeading";
 import Project from "./Project/Project";
 
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import SectionSubHeading from "@/shared/SectionSubHeading";
+import SectionSubHeading from "@/components/shared/SectionSubHeading";
 import useProjects from "./useProjects";
 import { Skeleton } from "@/components/ui/skeleton";
 

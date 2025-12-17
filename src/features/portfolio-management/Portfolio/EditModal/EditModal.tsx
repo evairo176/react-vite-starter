@@ -22,7 +22,7 @@ import { useFieldArray } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import SearchableSelect from "@/shared/searchable-select";
+import SearchableSelect from "@/components/shared/searchable-select";
 import type { IPCategory } from "@/core/types/category.type";
 import {
   Type,
@@ -40,7 +40,7 @@ import {
   Trash2,
   Image as ImageIcon,
 } from "lucide-react";
-import { TagsInput } from "@/shared/tag-input";
+import { TagsInput } from "@/components/shared/tag-input";
 
 type EditModalProps = {
   open: boolean;

@@ -4,7 +4,7 @@ import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "@/shared/table/data-table-column-header";
+import { DataTableColumnHeader } from "@/components/shared/table/data-table-column-header";
 import { fmtDate } from "@/core/utils/date";
 import {
   DropdownMenu,
@@ -15,14 +15,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { DataTable } from "@/shared/table/data-table";
+import { DataTable } from "@/components/shared/table/data-table";
 
 import usePortfolio from "./usePortfolio";
 import type { IPPortfolio } from "@/core/types/portfolio.type";
 import AddModal from "./AddModal";
 import DetailModal from "./DetailModal";
 import EditModal from "./EditModal/EditModal";
-import { TagsInput } from "@/shared/tag-input";
+import { TagsInput } from "@/components/shared/tag-input";
 import SEO from "@/components/shared/SEO";
 
 const Portfolio = () => {
@@ -177,7 +177,10 @@ const Portfolio = () => {
 
   return (
     <div className="md:p-6 p-4">
-      <SEO title="Portfolio" description="Manage and review Portfolio data for companies within the system" />
+      <SEO
+        title="Portfolio"
+        description="Manage and review Portfolio data for companies within the system"
+      />
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-2xl font-bold">Portfolio management</h1>

@@ -36,7 +36,7 @@ export default function Home() {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <SEO title="Dashboard" description="Overview of your portfolio analytics and content distribution." />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 relative">
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
           Overview of your portfolio analytics and content distribution.

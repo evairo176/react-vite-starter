@@ -7,7 +7,7 @@ import {
   DELAY,
   LIMIT_DEFAULT,
   PAGE_DEFAULT,
-} from "@/shared/table/list.constant";
+} from "@/components/shared/table/list.constant";
 
 // NOTE:
 // - Pertahankan API & nama fungsi yang sama: useChangeUrl

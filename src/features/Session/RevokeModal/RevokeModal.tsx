@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import UserAgentCell from "@/shared/user-agent-cell";
+import UserAgentCell from "@/components/shared/user-agent-cell";
 
 type RevokeModalModalProps = {
   open: boolean;

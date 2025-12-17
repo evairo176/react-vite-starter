@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import GuestRoute from "./GuestRoute";
-import ErrorPage from "../../shared/pages/ErrorPage";
+import ErrorPage from "../../components/shared/pages/ErrorPage";
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
-import NotFound from "@/shared/pages/NotFound";
+import NotFound from "@/components/shared/pages/NotFound";
 import Login from "@/features/auth/Login";
 import AuthLayout from "../layouts/AuthLayout";
 import Session from "@/features/Session";

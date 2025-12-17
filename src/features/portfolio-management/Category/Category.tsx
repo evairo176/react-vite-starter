@@ -2,7 +2,7 @@ import { Pencil, Plus, Trash } from "lucide-react";
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import type { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "@/shared/table/data-table-column-header";
+import { DataTableColumnHeader } from "@/components/shared/table/data-table-column-header";
 import { fmtDate } from "@/core/utils/date";
 import {
   DropdownMenu,
@@ -13,18 +13,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { DataTable } from "@/shared/table/data-table";
+import { DataTable } from "@/components/shared/table/data-table";
 import useCategory from "./useCategory";
 import type { IPCategory } from "@/core/types/category.type";
 import AddModal from "./AddModal/AddModal";
 import EditModal from "./EditModal/EditModal";
 
 const Category = () => {
-  const {
-    dataCategory,
-    isLoadingCategory,
-    refetchCategory,
-  } = useCategory();
+  const { dataCategory, isLoadingCategory, refetchCategory } = useCategory();
 
   const [addModal, setAddModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
@@ -133,7 +129,9 @@ const Category = () => {
       <div className="flex justify-between items-center mb-4">
         <div>
           <h1 className="text-2xl font-bold">Category management</h1>
-          <p className="text-muted-foreground">Manage and review Category data</p>
+          <p className="text-muted-foreground">
+            Manage and review Category data
+          </p>
         </div>
         <Button onClick={() => setAddModal(true)}>
           <Plus className="w-4 h-4 mr-2" />
