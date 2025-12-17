@@ -35,7 +35,7 @@ const CareerList = ({}: CareerListInterface) => {
             asChild
           >
             <a
-              href="dicki.prasetya.pdf"
+              href="dicki-prasetya-cv.pdf"
               target="_blank"
               download="Dicki Prasetya CV"
             >
