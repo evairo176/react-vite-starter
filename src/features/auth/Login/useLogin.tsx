@@ -42,8 +42,10 @@ const useLogin = () => {
   const form = useForm<ILoginForm>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
-      email: "semenjakpetang176@gmail.com",
-      password: "Juara123",
+      email: "s",
+      password: "",
+      // email: "semenjakpetang176@gmail.com",
+      //    password: "Juara123",
       rememberMe: false,
     },
     mode: "onSubmit",
@@ -66,7 +68,7 @@ const useLogin = () => {
           // jangan set 'User-Agent' — set custom header
           ...(userAgent ? { "x-user-agent": userAgent } : {}),
         },
-      }
+      },
     );
 
     return res;
