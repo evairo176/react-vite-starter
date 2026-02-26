@@ -11,6 +11,7 @@ import background from "/images/ilustrations/background_profile.webp";
 import ModeToggle from "../ModeToggle";
 import profile from "/images/ilustrations/profile.png";
 import Status from "../Status";
+import { ThemeCustomizer } from "@/components/shared/ThemeCustomizer";
 
 type Props = {
   isOpen: boolean;
@@ -32,7 +33,7 @@ const Profile = ({ isOpen }: Props) => {
           {/* <ToggleLanguage language={language} /> */}
         </div>
         <div className="absolute bottom-1 right-1">
-          <ModeToggle />
+          <ThemeCustomizer />
         </div>
       </div>
       <div

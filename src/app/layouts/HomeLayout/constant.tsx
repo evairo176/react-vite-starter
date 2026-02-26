@@ -258,7 +258,7 @@ export const STACKS = [
 export const CAREER = [
   {
     title: `Full-Stack Developer KPN Plantation`,
-    desc: `Bertanggung jawab mengembangkan dan memelihara aplikasi web dan sistem internal perusahaan, mencakup perancangan database, pengembangan frontend dan backend, integrasi IoT, serta integrasi sistem enterprise seperti SAP.`,
+    desc: `Saya melakukan analisis kebutuhan dan permasalahan bisnis untuk diterjemahkan menjadi business process yang terstruktur dan mudah dipahami oleh tim developer, mendesain flowchart sistem serta skema database untuk setiap proyek, bertanggung jawab sebagai Backend dan Frontend Developer dalam proses pengembangan aplikasi, mempresentasikan flowchart, skema database, serta timeline pengembangan per modul kepada atasan atau stakeholder, serta melakukan maintenance, perbaikan bug, dan pengembangan fitur lanjutan pada proyek yang telah berjalan.`,
     location: "Jakarta Selatan, Jakarta",
     startYear: "Agu 2023",
     endYear: "Sekarang",

@@ -36,9 +36,6 @@ const HomeLayout = () => {
           </motion.div>
         </div>
         <Footer />
-        <div className="fixed bottom-4 right-4">
-          <ThemeCustomizer />
-        </div>
       </>
     </QueryClientProvider>
   );
