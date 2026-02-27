@@ -6,11 +6,12 @@ export function AnalyticsTracker() {
   const location = useLocation();
 
   useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: location.pathname + location.search,
+    ReactGA.event("page_view", {
+      page_path: location.pathname,
+      page_location: window.location.href,
+      page_title: document.title,
     });
-  }, [location]);
+  }, [location.pathname]);
 
   return null;
 }
