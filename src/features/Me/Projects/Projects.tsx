@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const Projects = () => {
   const { dataPortfolio, isLoadingPortfolio } = useProjects();
-  console.log(dataPortfolio);
+
   return (
     <section className="space-y-6 mt-3 p-4 lg:p-8 rounded-md border bg-card text-card-foreground">
       <div className="space-y-2 ">

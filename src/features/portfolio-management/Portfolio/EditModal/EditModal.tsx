@@ -71,8 +71,6 @@ export default function EditModal({
 
   const formId = "editModal";
 
-  console.log({ form: form.formState.errors });
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-7xl w-full h-[90vh] flex flex-col p-0 gap-0 overflow-hidden sm:rounded-2xl">
