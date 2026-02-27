@@ -8,6 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import ReactGA from "react-ga4";
 
 ReactGA.initialize("G-EW2RQK1WEH"); // ganti dengan Measurement ID kamu
+ReactGA.send("pageview");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
