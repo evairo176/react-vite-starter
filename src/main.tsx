@@ -7,7 +7,7 @@ import { ThemeProvider } from "./core/providers/theme-provider.tsx";
 import { HelmetProvider } from "react-helmet-async";
 import ReactGA from "react-ga4";
 
-ReactGA.initialize("G-P3XXTK9FMT"); // ganti dengan Measurement ID kamu
+ReactGA.initialize("G-EW2RQK1WEH"); // ganti dengan Measurement ID kamu
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
