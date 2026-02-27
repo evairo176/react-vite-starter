@@ -1,5 +1,5 @@
 // src/router/GuestRoute.tsx
-import { AnalyticsTracker } from "@/components/shared/analytics";
+
 import { useAuthStore } from "@/core/store/authStore";
 import { Navigate, Outlet, useLocation, matchPath } from "react-router-dom";
 
@@ -30,10 +30,5 @@ export default function GuestRoute() {
   // Kalau user sudah login tapi bukan mengakses halaman auth, jangan redirect.
   // Mengembalikan <Outlet /> agar router tetap bisa mencari route yang cocok
   // (mis. ProtectedRoute / NotFound).
-  return (
-    <>
-      <AnalyticsTracker />
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 }

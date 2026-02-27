@@ -16,56 +16,67 @@ import Portfolio from "@/features/portfolio-management/Portfolio";
 import Home from "@/features/dashboard/Home";
 import Me from "@/features/Me";
 import HomeLayout from "../layouts/HomeLayout/HomeLayout";
+import RootLayout from "../layouts/RootLayout";
 
 const router = createBrowserRouter([
-  // 🔹 USER BELUM LOGIN
-
   {
-    element: <GuestRoute />,
+    element: <RootLayout />, // 🔥 GLOBAL WRAPPER
     errorElement: <ErrorPage />,
     children: [
       {
-        element: <AuthLayout />,
+        element: <GuestRoute />,
+        errorElement: <ErrorPage />,
         children: [
-          { path: "/login", element: <Login /> },
-          { path: "*", element: <NotFound /> },
+          {
+            element: <AuthLayout />,
+            children: [
+              { path: "/login", element: <Login /> },
+              { path: "*", element: <NotFound /> },
+            ],
+          },
+          {
+            element: <HomeLayout />,
+            children: [
+              { path: "/", element: <Me /> },
+              { path: "/projects", element: <div>projects</div> },
+              { path: "*", element: <NotFound /> },
+            ],
+          },
+          // { path: "/forgot-password", element: <ForgotPassword /> },
+          // { path: "/reset-password", element: <ResetPassword /> },
         ],
       },
+
       {
-        element: <HomeLayout />,
+        element: <ProtectedRoute allowed={[]} />,
+        errorElement: <ErrorPage />,
         children: [
-          { path: "/", element: <Me /> },
-          { path: "/projects", element: <div>projects</div> },
-          { path: "*", element: <NotFound /> },
+          {
+            element: <DashboardLayout />,
+            children: [
+              { path: "/dashboard", element: <Home /> },
+              { path: "/session", element: <Session /> },
+              { path: "/portfolio-management/category", element: <Category /> },
+              { path: "/portfolio-management/tag", element: <Tag /> },
+              {
+                path: "/portfolio-management/tech-stack",
+                element: <TechStack />,
+              },
+              { path: "/portfolio-management/image", element: <Image /> },
+              {
+                path: "/portfolio-management/portfolio",
+                element: <Portfolio />,
+              },
+              { path: "*", element: <NotFound /> },
+            ],
+          },
         ],
       },
-      // { path: "/forgot-password", element: <ForgotPassword /> },
-      // { path: "/reset-password", element: <ResetPassword /> },
+
+      // catch-all
+      { path: "*", element: <NotFound /> },
     ],
   },
-
-  {
-    element: <ProtectedRoute allowed={[]} />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        element: <DashboardLayout />,
-        children: [
-          { path: "/dashboard", element: <Home /> },
-          { path: "/session", element: <Session /> },
-          { path: "/portfolio-management/category", element: <Category /> },
-          { path: "/portfolio-management/tag", element: <Tag /> },
-          { path: "/portfolio-management/tech-stack", element: <TechStack /> },
-          { path: "/portfolio-management/image", element: <Image /> },
-          { path: "/portfolio-management/portfolio", element: <Portfolio /> },
-          { path: "*", element: <NotFound /> },
-        ],
-      },
-    ],
-  },
-
-  // catch-all
-  { path: "*", element: <NotFound /> },
 ]);
 
 export default router;
