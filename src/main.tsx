@@ -5,6 +5,9 @@ import "./App.css";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./core/providers/theme-provider.tsx";
 import { HelmetProvider } from "react-helmet-async";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-P3XXTK9FMT"); // ganti dengan Measurement ID kamu
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -13,5 +16,5 @@ createRoot(document.getElementById("root")!).render(
         <RouterProvider router={router} />
       </ThemeProvider>
     </HelmetProvider>
-  </StrictMode>
+  </StrictMode>,
 );
