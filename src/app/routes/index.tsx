@@ -17,6 +17,8 @@ import Home from "@/features/dashboard/Home";
 import Me from "@/features/Me";
 import HomeLayout from "../layouts/HomeLayout/HomeLayout";
 import RootLayout from "../layouts/RootLayout";
+import Booking from "@/features/testing/Booking";
+import TestingLayout from "../layouts/TestingLayout";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,13 @@ const router = createBrowserRouter([
             children: [
               { path: "/", element: <Me /> },
               { path: "/projects", element: <div>projects</div> },
+              { path: "*", element: <NotFound /> },
+            ],
+          },
+          {
+            element: <TestingLayout />,
+            children: [
+              { path: "/testing/booking", element: <Booking /> },
               { path: "*", element: <NotFound /> },
             ],
           },
