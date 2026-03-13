@@ -1,152 +1,91 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   CheckCircle,
   Clock,
   AlertCircle,
   Users,
   Briefcase,
-  Timer,
-  TrendingUp,
+  Loader2,
+  RefreshCw,
 } from "lucide-react";
+import useDashboardTicket from "./useDashboardTicket";
 
 type Props = {};
 
 const DashboardTicket = (props: Props) => {
-  const ticketSummary = {
-    total: 9,
-    done: 2,
-    pending: 7,
-    over48: 0,
-  };
+  const {
+    dataDashboardTicket,
+    isLoadingDashboardTicket,
+    isRefetchingDashboardTicket,
+    refetchDashboardTicket,
+  } = useDashboardTicket();
+  const ticketSummary = dataDashboardTicket?.ticketSummary;
 
-  const categoryStats = [
-    { _count: 3, requestType: "DOXA_REVISION" },
-    { _count: 5, requestType: "SOFTWARE" },
-    { _count: 1, requestType: "OTHER" },
-  ];
+  const categoryStats = dataDashboardTicket?.categoryStats;
 
-  const picPerformance = [
-    {
-      pic: "Andi Saputra",
-      totalJobs: 1,
-      totalMinutes: 36,
-      avgMinutesPerJob: 36,
-      over48Hours: 0,
-      unfinishedJobs: 0,
-    },
-    {
-      pic: "Budi Pratama",
-      totalJobs: 0,
-      totalMinutes: 0,
-      avgMinutesPerJob: 0,
-      over48Hours: 0,
-      unfinishedJobs: 0,
-    },
-    {
-      pic: "Cahyo Nugroho",
-      totalJobs: 1,
-      totalMinutes: 16,
-      avgMinutesPerJob: 16,
-      over48Hours: 0,
-      unfinishedJobs: 1,
-    },
-    {
-      pic: "Dimas Setiawan",
-      totalJobs: 0,
-      totalMinutes: 0,
-      avgMinutesPerJob: 0,
-      over48Hours: 0,
-      unfinishedJobs: 0,
-    },
-    {
-      pic: "Eko Prasetyo",
-      totalJobs: 0,
-      totalMinutes: 0,
-      avgMinutesPerJob: 0,
-      over48Hours: 0,
-      unfinishedJobs: 0,
-    },
-    {
-      pic: "Fajar Hidayat",
-      totalJobs: 0,
-      totalMinutes: 0,
-      avgMinutesPerJob: 0,
-      over48Hours: 0,
-      unfinishedJobs: 0,
-    },
-    {
-      pic: "Gilang Ramadhan",
-      totalJobs: 0,
-      totalMinutes: 0,
-      avgMinutesPerJob: 0,
-      over48Hours: 0,
-      unfinishedJobs: 0,
-    },
-    {
-      pic: "Hendra Wijaya",
-      totalJobs: 0,
-      totalMinutes: 0,
-      avgMinutesPerJob: 0,
-      over48Hours: 0,
-      unfinishedJobs: 0,
-    },
-    {
-      pic: "Indra Kurniawan",
-      totalJobs: 0,
-      totalMinutes: 0,
-      avgMinutesPerJob: 0,
-      over48Hours: 0,
-      unfinishedJobs: 0,
-    },
-    {
-      pic: "Joko Santoso",
-      totalJobs: 0,
-      totalMinutes: 0,
-      avgMinutesPerJob: 0,
-      over48Hours: 0,
-      unfinishedJobs: 0,
-    },
-  ];
+  const picPerformance = dataDashboardTicket?.picPerformance;
 
   const stats = [
     {
       title: "Total Tickets",
-      value: ticketSummary.total,
+      value: ticketSummary?.total || 0,
       icon: Briefcase,
       color: "text-blue-600",
       bgColor: "bg-blue-100",
     },
     {
       title: "Selesai",
-      value: ticketSummary.done,
+      value: ticketSummary?.done || 0,
       icon: CheckCircle,
       color: "text-green-600",
       bgColor: "bg-green-100",
     },
     {
       title: "Pending",
-      value: ticketSummary.pending,
+      value: ticketSummary?.pending || 0,
       icon: Clock,
       color: "text-yellow-600",
       bgColor: "bg-yellow-100",
     },
     {
       title: "Over 48 Jam",
-      value: ticketSummary.over48,
+      value: ticketSummary?.over48 || 0,
       icon: AlertCircle,
       color: "text-red-600",
       bgColor: "bg-red-100",
     },
   ];
 
+  if (isLoadingDashboardTicket) {
+    return (
+      <div className="p-6 flex items-center justify-center min-h-[400px]">
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+
   return (
     <div className="p-6 space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Dashboard Ticket</h1>
-        <p className="text-muted-foreground">
-          Overview of ticket performance and PIC statistics
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold">Dashboard Ticket</h1>
+          <p className="text-muted-foreground">
+            Overview of ticket performance and PIC statistics
+          </p>
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => refetchDashboardTicket()}
+          disabled={isRefetchingDashboardTicket}
+        >
+          <RefreshCw
+            className={`h-4 w-4 mr-2 ${isRefetchingDashboardTicket ? "animate-spin" : ""}`}
+          />
+          {isRefetchingDashboardTicket ? "Refreshing..." : "Refresh"}
+        </Button>
       </div>
 
       {/* Summary Cards */}
@@ -170,7 +109,7 @@ const DashboardTicket = (props: Props) => {
 
       {/* Category Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {categoryStats.map((category, index) => (
+        {(categoryStats || []).map((category: any, index: number) => (
           <Card key={index}>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">
@@ -219,7 +158,7 @@ const DashboardTicket = (props: Props) => {
                 </tr>
               </thead>
               <tbody>
-                {picPerformance.map((pic, index) => (
+                {(picPerformance || []).map((pic: any, index: number) => (
                   <tr key={index} className="border-b hover:bg-muted/50">
                     <td className="py-3 px-4 font-medium">{pic.pic}</td>
                     <td className="text-center py-3 px-4">
