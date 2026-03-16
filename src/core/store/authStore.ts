@@ -7,6 +7,7 @@ export interface User {
   email: string;
   roleId: number; // sesuaikan dengan backend-mu
   name?: string;
+  role?: string;
 }
 
 interface AuthState {
@@ -58,6 +59,6 @@ export const useAuthStore = create<AuthState>()(
         accessToken: state.accessToken,
         isAuthenticated: state.isAuthenticated,
       }),
-    }
-  )
+    },
+  ),
 );

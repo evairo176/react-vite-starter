@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuthStore } from "@/core/store/authStore";
 
 interface ProtectedRouteProps {
-  allowed?: number[]; // id role yang diizinkan, misal [1,2]
+  allowed?: string[]; // id role yang diizinkan, misal [1,2]
 }
 
 export default function ProtectedRoute({ allowed }: ProtectedRouteProps) {
@@ -25,9 +25,9 @@ export default function ProtectedRoute({ allowed }: ProtectedRouteProps) {
   }
 
   // 3) Optional role check
-  // if (allowed && !allowed.includes(user.roleId)) {
-  //   return <Navigate to="/home" replace />;
-  // }
+  if (allowed && !allowed.includes(user?.role as string)) {
+    return <Navigate to="/not-found" replace />;
+  }
 
   return <Outlet />;
 }

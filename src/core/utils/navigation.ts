@@ -73,6 +73,28 @@ export const data = {
         },
       ],
     },
+    {
+      title: "Roles",
+      url: "/roles",
+      icon: PieChart,
+    },
+  ],
+  testing: [
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: Frame,
+    },
+    {
+      title: "Claim",
+      url: "/claim",
+      icon: Frame,
+    },
+    {
+      title: "Session",
+      url: "/session",
+      icon: PieChart,
+    },
   ],
   projects: [
     {

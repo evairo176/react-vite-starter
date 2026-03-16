@@ -42,7 +42,7 @@ const useLogin = () => {
   const form = useForm<ILoginForm>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
-      email: "s",
+      email: "",
       password: "",
       // email: "semenjakpetang176@gmail.com",
       //    password: "Juara123",

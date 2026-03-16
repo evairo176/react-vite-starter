@@ -19,6 +19,8 @@ import HomeLayout from "../layouts/HomeLayout/HomeLayout";
 import RootLayout from "../layouts/RootLayout";
 import Booking from "@/features/testing/Booking";
 import TestingLayout from "../layouts/TestingLayout";
+import Role from "@/features/Role";
+import Claim from "@/features/Claim";
 
 const router = createBrowserRouter([
   {
@@ -55,7 +57,6 @@ const router = createBrowserRouter([
           // { path: "/reset-password", element: <ResetPassword /> },
         ],
       },
-
       {
         element: <ProtectedRoute allowed={[]} />,
         errorElement: <ErrorPage />,
@@ -63,8 +64,8 @@ const router = createBrowserRouter([
           {
             element: <DashboardLayout />,
             children: [
-              { path: "/dashboard", element: <Home /> },
-              { path: "/session", element: <Session /> },
+              // { path: "/dashboard", element: <Home /> },
+              // { path: "/session", element: <Session /> },
               { path: "/portfolio-management/category", element: <Category /> },
               { path: "/portfolio-management/tag", element: <Tag /> },
               {
@@ -76,12 +77,35 @@ const router = createBrowserRouter([
                 path: "/portfolio-management/portfolio",
                 element: <Portfolio />,
               },
+              {
+                path: "/roles",
+                element: <Role />,
+              },
               { path: "*", element: <NotFound /> },
             ],
           },
         ],
       },
-
+      {
+        element: (
+          <ProtectedRoute allowed={["APPROVER", "VERIFIER", "ADMIN", "USER"]} />
+        ),
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            element: <DashboardLayout />,
+            children: [
+              { path: "/dashboard", element: <Home /> },
+              { path: "/session", element: <Session /> },
+              {
+                path: "/claim",
+                element: <Claim />,
+              },
+              { path: "*", element: <NotFound /> },
+            ],
+          },
+        ],
+      },
       // catch-all
       { path: "*", element: <NotFound /> },
     ],

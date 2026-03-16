@@ -11,8 +11,10 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Layers, Tags, Cpu, Briefcase, TrendingUp } from "lucide-react";
 import SEO from "@/components/shared/SEO";
+import { useAuthStore } from "@/core/store/authStore";
 
 export default function Home() {
+  const { user } = useAuthStore();
   const { data: analytics, isLoading } = useQuery({
     queryKey: ["dashboard-analytics"],
     queryFn: async () => {
@@ -20,6 +22,19 @@ export default function Home() {
       return res.data.data;
     },
   });
+
+  if (["APPROVER", "VERIFIER", "USER"].includes(user?.role || "")) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">Access Denied</h1>
+          <p className="text-lg text-muted-foreground">
+            You do not have permission to view this dashboard.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -35,7 +50,10 @@ export default function Home() {
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <SEO title="Dashboard" description="Overview of your portfolio analytics and content distribution." />
+      <SEO
+        title="Dashboard"
+        description="Overview of your portfolio analytics and content distribution."
+      />
       <div className="flex flex-col gap-2 relative">
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">
