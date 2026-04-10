@@ -33,16 +33,13 @@ const Introduction = () => {
           </li>
         </ul>
         <p className="leading-[1.8] md:leading-loose text-neutral-800 dark:text-neutral-300 text-justify">
-          Saya merupakan seorang Full-Stack Developer dengan pengalaman dalam
-          merancang, mengembangkan, dan memelihara aplikasi berbasis web secara
-          menyeluruh, mencakup pengelolaan database, pengembangan backend dan
-          frontend, serta integrasi sistem. Saya memiliki kompetensi dalam
-          menggunakan berbagai teknologi seperti Next.js, React, Express,
-          Laravel, dan .NET, serta basis data SQL dan NoSQL untuk mendukung
-          pengembangan sistem yang andal dan terstruktur. Dengan komitmen
-          terhadap kualitas kode, keamanan aplikasi, dan efisiensi sistem, saya
-          terbiasa mengimplementasikan solusi teknologi yang selaras dengan
-          kebutuhan bisnis dan standar pengembangan perangkat lunak profesional.
+          Saya merupakan seorang Fullstack Developer dengan pengalaman 4 tahun
+          dalam pengembangan aplikasi web atau mobile dan sistem yang
+          terintegrasi. Memiliki kemampuan analisis yang kuat dalam
+          menerjemahkan kebutuhan bisnis menjadi solusi terstruktur dan efektif.
+          Terbiasa bekerja secara mandiri maupun dalam tim, serta mampu menyusun
+          dan mempresentasikan rancangan proyek secara sistematis dengan fokus
+          pada hasil, kualitas kode, dan efisiensi pengembangan.
         </p>
       </div>
     </section>
