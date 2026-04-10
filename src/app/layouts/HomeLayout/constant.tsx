@@ -7,7 +7,7 @@ import {
   AiOutlineDashboard,
 } from "react-icons/ai";
 import { GoTasklist } from "react-icons/go";
-import { SiAboutdotme, SiEducative } from "react-icons/si";
+import { SiAboutdotme } from "react-icons/si";
 import { MdOutlineContacts } from "react-icons/md";
 
 import { BiLogoPostgresql } from "react-icons/bi";
@@ -45,6 +45,7 @@ import {
   SiGo,
   SiDotnet,
   SiPython,
+  SiGithubactions,
 } from "react-icons/si";
 import { HiAcademicCap, HiBriefcase } from "react-icons/hi";
 
@@ -133,6 +134,10 @@ export const STACKS = [
     icon: <SiReact size={iconSize} className="text-sky-500" />,
   },
   {
+    name: "CI/CD",
+    icon: <SiGithubactions size={iconSize} color="#2088FF" />,
+  },
+  {
     name: "TailwindCSS",
     icon: <SiTailwindcss size={iconSize} className="text-cyan-300" />,
   },
@@ -163,14 +168,6 @@ export const STACKS = [
   {
     name: "Expo",
     icon: <SiExpo size={iconSize} />,
-  },
-  {
-    name: "SASS",
-    icon: <SiSass size={iconSize} className="text-pink-600" />,
-  },
-  {
-    name: "Gulp",
-    icon: <SiGulp size={iconSize} className="text-red-500" />,
   },
   {
     name: "Firebase",
