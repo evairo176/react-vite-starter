@@ -99,17 +99,17 @@ const router = createBrowserRouter([
             children: [
               { path: "/dashboard", element: <Home /> },
               { path: "/session", element: <Session /> },
-              { path: "/portfolio-management/category", element: <Category /> },
-              { path: "/portfolio-management/tag", element: <Tag /> },
-              {
-                path: "/portfolio-management/tech-stack",
-                element: <TechStack />,
-              },
-              { path: "/portfolio-management/image", element: <Image /> },
-              {
-                path: "/portfolio-management/portfolio",
-                element: <Portfolio />,
-              },
+              // { path: "/portfolio-management/category", element: <Category /> },
+              // { path: "/portfolio-management/tag", element: <Tag /> },
+              // {
+              //   path: "/portfolio-management/tech-stack",
+              //   element: <TechStack />,
+              // },
+              // { path: "/portfolio-management/image", element: <Image /> },
+              // {
+              //   path: "/portfolio-management/portfolio",
+              //   element: <Portfolio />,
+              // },
               {
                 path: "/roles",
                 element: <Role />,
