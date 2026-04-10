@@ -42,6 +42,9 @@ import {
   SiTailwindcss,
   SiTypescript,
   SiVite,
+  SiGo,
+  SiDotnet,
+  SiPython,
 } from "react-icons/si";
 import { HiAcademicCap, HiBriefcase } from "react-icons/hi";
 
@@ -98,8 +101,20 @@ export const MENU = [
 
 export const STACKS = [
   {
+    name: "Golang",
+    icon: <SiGo size={iconSize} color="#00ADD8" />,
+  },
+  {
+    name: ".NET",
+    icon: <SiDotnet size={iconSize} color="#512bd4" />,
+  },
+  {
     name: "PHP",
     icon: <SiPhp size={iconSize} className="text-blue-500" />,
+  },
+  {
+    name: "Python",
+    icon: <SiPython size={iconSize} color="#3776AB" />,
   },
   {
     name: "JavaScript",
@@ -264,6 +279,16 @@ export const CAREER = [
     endYear: "Sekarang",
     icon: HiBriefcase,
     highlight: true,
+  },
+  {
+    title: `Studi S1
+Universitas Siber asia`,
+    desc: `saya lulus setelah 2 tahun belajar, karena saya sudah memiliki pengalaman kerja sebelumnya. Saya memutuskan untuk melanjutkan studi S1 untuk memperdalam pengetahuan saya dalam bidang teknologi informasi dan meningkatkan keterampilan saya sebagai seorang profesional di industri ini.`,
+    location: "Jakarta Selatan, DKI Jakarta",
+    startYear: "Okt 2024",
+    endYear: "Jun 2026",
+    icon: HiAcademicCap,
+    highlight: false,
   },
   {
     title: `Full-Stack Developer Frelance`,
