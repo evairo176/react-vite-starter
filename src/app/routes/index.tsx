@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        element: <ProtectedRoute allowed={["USER"]} />,
+        element: <ProtectedRoute allowed={["USER", "ADMIN"]} />,
         errorElement: <ErrorPage />,
         children: [
           {
