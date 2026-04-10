@@ -78,6 +78,11 @@ export const data = {
       url: "/roles",
       icon: PieChart,
     },
+    {
+      title: "Products",
+      url: "/products",
+      icon: PieChart,
+    },
   ],
   testing: [
     {
