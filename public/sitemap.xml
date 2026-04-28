@@ -7,10 +7,10 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://react-vite-starter-beta.vercel.app/projects</loc>
+    <loc>https://react-vite-starter-beta.vercel.app/blog/prediksi-ranjau-dan-batu</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://react-vite-starter-beta.vercel.app/blog/i-learned-react-hooks</loc>
@@ -19,7 +19,13 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://react-vite-starter-beta.vercel.app/blog/fefefe</loc>
+    <loc>https://react-vite-starter-beta.vercel.app/blog/before-laravel-13-3-files-2-packages</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://react-vite-starter-beta.vercel.app/blog/you're learning Reac</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
