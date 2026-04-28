@@ -1,13 +1,11 @@
 import {
   AudioWaveform,
   BookOpen,
-  Bot,
   Command,
   Frame,
   GalleryVerticalEnd,
   Map,
   PieChart,
-  Settings2,
   SquareTerminal,
 } from "lucide-react";
 
@@ -74,9 +72,9 @@ export const data = {
       ],
     },
     {
-      title: "Roles",
-      url: "/roles",
-      icon: PieChart,
+      title: "Blog Posts",
+      url: "/blog-posts",
+      icon: BookOpen,
     },
     {
       title: "Products",

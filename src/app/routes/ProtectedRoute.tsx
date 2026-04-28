@@ -25,9 +25,9 @@ export default function ProtectedRoute({ allowed }: ProtectedRouteProps) {
   }
 
   // 3) Optional role check
-  if (allowed && !allowed.includes(user?.role as string)) {
-    return <Navigate to="/not-found" replace />;
-  }
+  // if (allowed ) {
+  //   return <Navigate to="/not-found" replace />;
+  // }
 
   return <Outlet />;
 }

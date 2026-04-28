@@ -3,6 +3,7 @@ import CareerList from "./CareerList";
 import Introduction from "./Introduction";
 import Projects from "./Projects/Projects";
 import Skills from "./Skills";
+import Blogs from "./Blogs";
 
 const Me = () => {
   return (
@@ -15,6 +16,7 @@ const Me = () => {
       <CareerList />
       <Projects />
       <Skills />
+      <Blogs />
     </>
   );
 };

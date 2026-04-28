@@ -17,11 +17,9 @@ import Home from "@/features/dashboard/Home";
 import Me from "@/features/Me";
 import HomeLayout from "../layouts/HomeLayout/HomeLayout";
 import RootLayout from "../layouts/RootLayout";
-import Booking from "@/features/testing/Booking";
 import TestingLayout from "../layouts/TestingLayout";
-import Role from "@/features/Role";
-import Claim from "@/features/Claim";
-import Product from "@/features/Product";
+import BlogPost from "@/features/blog-post/BlogPost";
+import BlogDetail from "@/features/blog/BlogDetail";
 
 const router = createBrowserRouter([
   {
@@ -44,13 +42,13 @@ const router = createBrowserRouter([
             children: [
               { path: "/", element: <Me /> },
               { path: "/projects", element: <div>projects</div> },
+              { path: "/blog/:slug", element: <BlogDetail /> },
               { path: "*", element: <NotFound /> },
             ],
           },
           {
             element: <TestingLayout />,
             children: [
-              { path: "/testing/booking", element: <Booking /> },
               { path: "*", element: <NotFound /> },
             ],
           },
@@ -59,7 +57,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        element: <ProtectedRoute allowed={["USER", "ADMIN"]} />,
+        element: <ProtectedRoute allowed={[]} />,
         errorElement: <ErrorPage />,
         children: [
           {
@@ -78,50 +76,15 @@ const router = createBrowserRouter([
                 path: "/portfolio-management/portfolio",
                 element: <Portfolio />,
               },
+              {
+                path: "/blog-posts",
+                element: <BlogPost />,
+              },
               // {
               //   path: "/roles",
               //   element: <Role />,
               // },
 
-              { path: "*", element: <NotFound /> },
-            ],
-          },
-        ],
-      },
-      {
-        element: (
-          <ProtectedRoute allowed={["APPROVER", "VERIFIER", "ADMIN", "USER"]} />
-        ),
-        errorElement: <ErrorPage />,
-        children: [
-          {
-            element: <DashboardLayout />,
-            children: [
-              { path: "/dashboard", element: <Home /> },
-              { path: "/session", element: <Session /> },
-              // { path: "/portfolio-management/category", element: <Category /> },
-              // { path: "/portfolio-management/tag", element: <Tag /> },
-              // {
-              //   path: "/portfolio-management/tech-stack",
-              //   element: <TechStack />,
-              // },
-              // { path: "/portfolio-management/image", element: <Image /> },
-              // {
-              //   path: "/portfolio-management/portfolio",
-              //   element: <Portfolio />,
-              // },
-              {
-                path: "/roles",
-                element: <Role />,
-              },
-              {
-                path: "/claim",
-                element: <Claim />,
-              },
-              {
-                path: "/products",
-                element: <Product />,
-              },
               { path: "*", element: <NotFound /> },
             ],
           },

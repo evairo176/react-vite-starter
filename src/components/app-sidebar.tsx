@@ -20,7 +20,7 @@ import { NavUser } from "./nav-user";
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useAuthStore();
 
-  const role = user?.role;
+
 
   return (
     <Sidebar
@@ -33,11 +33,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <div className="text-3xl font-bold text-center underline">Evairo</div>
       </SidebarHeader>
       <SidebarContent>
-        {role === "ADMIN" && <NavMain items={data.navMain} />}
-        {role === "APPROVER" && <NavMain items={data.testing} />}
-        {role === "VERIFIER" && <NavMain items={data.testing} />}
-        {role === "USER" && <NavMain items={data.testing} />}
-        {/* <NavProjects projects={data.projects} /> */}
+ <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={user as any} />
