@@ -17,7 +17,7 @@ const SITE_URL = (
   process.env.SITE_URL || "https://react-vite-starter-beta.vercel.app"
 ).replace(/\/$/, "");
 const API_URL = (
-  process.env.API_URL || "http://localhost:8000/api/v1"
+  process.env.VITE_API_URL || "http://localhost:8000/api/v1"
 ).replace(/\/$/, "");
 
 const today = new Date().toISOString().split("T")[0];
