@@ -4,7 +4,7 @@ export const fmtDate = (d?: Date | string | null) => {
   if (isNaN(dt.getTime())) return "—";
   return dt.toLocaleDateString();
 };
-// check
+// check 2
 export const formatDate = (date: string) => {
   return new Date(date).toLocaleString("id-ID", {
     day: "2-digit",
@@ -14,3 +14,5 @@ export const formatDate = (date: string) => {
     minute: "2-digit",
   });
 };
+
+  
