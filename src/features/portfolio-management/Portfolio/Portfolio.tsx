@@ -1,4 +1,4 @@
-import { Eye, Loader, MoreVertical, Plus, Trash } from "lucide-react";
+import { Eye, Loader, MoreVertical, Plus, Trash, Upload } from "lucide-react";
 
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
@@ -22,6 +22,7 @@ import type { IPPortfolio } from "@/core/types/portfolio.type";
 import AddModal from "./AddModal";
 import DetailModal from "./DetailModal";
 import EditModal from "./EditModal/EditModal";
+import UploadSheet from "./UploadSheet";
 import { TagsInput } from "@/components/shared/tag-input";
 import SEO from "@/components/shared/SEO";
 
@@ -39,6 +40,7 @@ const Portfolio = () => {
   const [addModal, setAddModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [detailModal, setDetailModal] = useState(false);
+  const [uploadSheet, setUploadSheet] = useState(false);
   const [id, setId] = useState<string>("");
 
   const columns: ColumnDef<IPPortfolio>[] = [
@@ -189,15 +191,26 @@ const Portfolio = () => {
           </p>
         </div>
 
-        <Button
-          onClick={() => {
-            setAddModal(true);
-          }}
-        >
-          {" "}
-          <Plus className="w-4 h-4 mr-2" />
-          Tambah Portfolio
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            onClick={() => {
+              setUploadSheet(true);
+            }}
+          >
+            <Upload className="w-4 h-4 mr-2" />
+            Bulk Upload Image
+          </Button>
+          <Button
+            onClick={() => {
+              setAddModal(true);
+            }}
+          >
+            {" "}
+            <Plus className="w-4 h-4 mr-2" />
+            Tambah Portfolio
+          </Button>
+        </div>
       </div>
 
       <div className="w-full grid gap-2 relative overflow-x-hidden">
@@ -229,6 +242,12 @@ const Portfolio = () => {
         setOpen={setEditModal}
         data={selected}
         refetch={refetchPortfolio}
+      />
+      <UploadSheet
+        open={uploadSheet}
+        onOpenChange={setUploadSheet}
+        defaultFolder="portfolio"
+        onUploaded={() => refetchPortfolio?.()}
       />
     </div>
   );
