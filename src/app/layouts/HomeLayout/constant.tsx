@@ -15,7 +15,7 @@ import { BiLogoPostgresql } from "react-icons/bi";
 // import apps from "/images/projects/appstore.jpg";
 import {
   SiChakraui,
-  SiCss3,
+  SiCss as SiCss3,
   SiExpo,
   SiExpress,
   SiFirebase,

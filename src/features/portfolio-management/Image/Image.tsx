@@ -15,9 +15,11 @@ import {
   DownloadCloud,
   ChevronsLeft,
   ChevronsRight,
+  Upload,
 } from "lucide-react";
 import type { IPImage } from "@/core/types/image.type";
 import useImage from "./useImage";
+import UploadModal from "./UploadModal";
 
 type Props = {
   className?: string;
@@ -55,6 +57,7 @@ const Image: React.FC<Props> = ({ className = "" }) => {
   // Local dialog state
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<IPImage | null>(null);
+  const [uploadOpen, setUploadOpen] = useState(false);
 
   const onOpen = (img: IPImage) => {
     setActive(img);
@@ -159,6 +162,14 @@ const Image: React.FC<Props> = ({ className = "" }) => {
           >
             <RefreshCw className="w-4 h-4" />
             Refresh
+          </Button>
+
+          <Button
+            onClick={() => setUploadOpen(true)}
+            className="flex items-center gap-2"
+          >
+            <Upload className="w-4 h-4" />
+            Upload
           </Button>
         </div>
       </div>
@@ -366,6 +377,17 @@ const Image: React.FC<Props> = ({ className = "" }) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Bulk Upload Modal */}
+      <UploadModal
+        open={uploadOpen}
+        onOpenChange={setUploadOpen}
+        onUploaded={() => {
+          // refresh gallery & jump to page 1 to show new uploads
+          handleChangePage(1);
+          refetchImage();
+        }}
+      />
     </div>
   );
 };
