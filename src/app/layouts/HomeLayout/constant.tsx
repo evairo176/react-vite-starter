@@ -15,7 +15,7 @@ import { BiLogoPostgresql } from "react-icons/bi";
 // import apps from "/images/projects/appstore.jpg";
 import {
   SiChakraui,
-  SiCss as SiCss3,
+  SiCss3,
   SiExpo,
   SiExpress,
   SiFirebase,
@@ -269,13 +269,23 @@ export const STACKS = [
 
 export const CAREER = [
   {
+    title: `Senior Full-Stack Programmer
+Fiberstar (PT. Mega Akses Persada)`,
+    desc: `Bertanggung jawab merancang dan mengembangkan aplikasi end-to-end untuk mendukung operasional bisnis Fiberstar. Berperan sebagai Senior Full-Stack Programmer, saya menangani arsitektur sistem, pengembangan backend & frontend, code review, mentoring tim, integrasi service, optimasi performa, serta memastikan kualitas delivery sesuai standar enterprise.`,
+    location: "Jakarta, Indonesia",
+    startYear: "Apr 2026",
+    endYear: "Sekarang",
+    icon: HiBriefcase,
+    highlight: true,
+  },
+  {
     title: `Full-Stack Developer KPN Plantation`,
     desc: `Saya melakukan analisis kebutuhan dan permasalahan bisnis untuk diterjemahkan menjadi business process yang terstruktur dan mudah dipahami oleh tim developer, mendesain flowchart sistem serta skema database untuk setiap proyek, bertanggung jawab sebagai Backend dan Frontend Developer dalam proses pengembangan aplikasi, mempresentasikan flowchart, skema database, serta timeline pengembangan per modul kepada atasan atau stakeholder, serta melakukan maintenance, perbaikan bug, dan pengembangan fitur lanjutan pada proyek yang telah berjalan.`,
     location: "Jakarta Selatan, Jakarta",
     startYear: "Agu 2023",
-    endYear: "Sekarang",
+    endYear: "Mar 2026",
     icon: HiBriefcase,
-    highlight: true,
+    highlight: false,
   },
   {
     title: `Studi S1
