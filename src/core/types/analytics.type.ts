@@ -10,8 +10,6 @@ export interface VisitPayload {
 /** Totals returned by `/analytics/summary`, rendered as summary cards. (Req 12.1) */
 export interface AnalyticsSummary {
   totalVisits: number;
-  totalPosts: number;
-  totalProjects: number;
   [k: string]: number;
 }
 
