@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/pagination";
 import type { PublicProject } from "@/core/types/portfolio.type";
 import { cn } from "@/lib/utils";
-import useProjectList from "./useProjectList";
+import useProjectList, { PROJECT_SORT_OPTIONS } from "./useProjectList";
 
 const ALL_CATEGORIES = "__all__";
 
@@ -103,11 +103,13 @@ const ProjectList = () => {
     category,
     selectedTech,
     searchInput,
+    sort,
     page,
     categoryOptions,
     techOptions,
     handleChangeCategory,
     handleChangeTech,
+    handleChangeSort,
     handleSearchChange,
     handleChangePage,
   } = useProjectList();
@@ -163,7 +165,7 @@ const ProjectList = () => {
       </MotionSection>
 
       {/* Filter bar. */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <div className="grid gap-2">
           <Label htmlFor="project-search">Cari</Label>
           <div className="relative">
@@ -219,6 +221,26 @@ const ProjectList = () => {
             value: option.name,
           }))}
         />
+
+        <div className="grid gap-2">
+          <Label htmlFor="project-sort">Urutkan</Label>
+          <Select value={sort} onValueChange={handleChangeSort}>
+            <SelectTrigger
+              id="project-sort"
+              className="w-full"
+              aria-label="Urutkan proyek"
+            >
+              <SelectValue placeholder="Terbaru" />
+            </SelectTrigger>
+            <SelectContent>
+              {PROJECT_SORT_OPTIONS.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {hasActiveFilters ? (

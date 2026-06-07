@@ -22,8 +22,19 @@ interface ProjectListSearch {
   category?: string;
   tech?: string; // CSV in the URL
   search?: string;
+  sort?: string;
   page?: number;
 }
+
+/** Allowed sort values; anything else falls back to the default. */
+export const PROJECT_SORT_OPTIONS = [
+  { value: "newest", label: "Terbaru" },
+  { value: "oldest", label: "Terlama" },
+  { value: "recently-updated", label: "Baru diperbarui" },
+  { value: "featured", label: "Unggulan dulu" },
+] as const;
+
+const DEFAULT_SORT = "newest";
 
 /** Split a CSV query value into a trimmed, non-empty string array. */
 const parseCsv = (value?: string): string[] =>
@@ -54,6 +65,7 @@ const useProjectList = () => {
   const category = search.category ?? "";
   const selectedTech = useMemo(() => parseCsv(search.tech), [search.tech]);
   const committedSearch = search.search ?? "";
+  const sort = search.sort ?? DEFAULT_SORT;
   const page = Number(search.page ?? 1) || 1;
 
   // Local, immediate value for the search input; committed to the URL after a
@@ -94,10 +106,11 @@ const useProjectList = () => {
       category: category || undefined,
       tech: selectedTech.length ? selectedTech : undefined,
       search: committedSearch || undefined,
+      sort: sort !== DEFAULT_SORT ? sort : undefined,
       page,
       limit: DEFAULT_LIMIT,
     }),
-    [category, selectedTech, committedSearch, page]
+    [category, selectedTech, committedSearch, sort, page]
   );
 
   const queryString = useMemo(() => buildListQuery(params), [params]);
@@ -155,6 +168,13 @@ const useProjectList = () => {
     pushSearch({ tech: next.length ? next.join(",") : undefined, page: undefined });
   };
 
+  const handleChangeSort = (next: string) => {
+    pushSearch({
+      sort: next && next !== DEFAULT_SORT ? next : undefined,
+      page: undefined,
+    });
+  };
+
   const handleSearchChange = (value: string) => {
     setSearchInput(value);
     debounce(() => {
@@ -180,6 +200,7 @@ const useProjectList = () => {
     category,
     selectedTech,
     searchInput,
+    sort,
     page,
     // option lists
     categoryOptions,
@@ -187,6 +208,7 @@ const useProjectList = () => {
     // handlers
     handleChangeCategory,
     handleChangeTech,
+    handleChangeSort,
     handleSearchChange,
     handleChangePage,
   };

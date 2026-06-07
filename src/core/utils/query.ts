@@ -16,6 +16,7 @@ export interface PortfolioListParams {
   tech?: string[]; // serialized as CSV: tech=x,y
   search?: string;
   featured?: boolean;
+  sort?: string; // result ordering: newest | oldest | recently-updated | featured
   page?: number;
   limit?: number;
 }
@@ -47,6 +48,7 @@ export function buildListQuery(params: ListParams): string {
     "tech",
     "search",
     "featured",
+    "sort",
     "page",
     "limit",
   ];
