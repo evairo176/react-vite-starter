@@ -1,13 +1,12 @@
-// src/router/ProtectedRoute.tsx
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+// src/app/routes/ProtectedRoute.tsx
+import { Navigate, Outlet } from "@tanstack/react-router";
 import { useAuthStore } from "@/core/store/authStore";
 
 interface ProtectedRouteProps {
   allowed?: string[]; // id role yang diizinkan, misal [1,2]
 }
 
-export default function ProtectedRoute({ allowed }: ProtectedRouteProps) {
-  const location = useLocation();
+export default function ProtectedRoute({ allowed: _allowed }: ProtectedRouteProps) {
   const { isAuthenticated, user, hydrated } = useAuthStore();
 
   // ⏳ 1) BELUM REHYDRATED → jangan redirect dulu
@@ -19,15 +18,10 @@ export default function ProtectedRoute({ allowed }: ProtectedRouteProps) {
     );
   }
 
-  // 🔑 2) Setelah hydrated: baru evaluasi auth
+  // 🔑 2) Setelah hydrated: baru evaluasi auth → redirect ke login (Req 18.5)
   if (!isAuthenticated || !user) {
-    return <Navigate to="/" replace state={{ from: location }} />;
+    return <Navigate to="/login" replace />;
   }
-
-  // 3) Optional role check
-  // if (allowed ) {
-  //   return <Navigate to="/not-found" replace />;
-  // }
 
   return <Outlet />;
 }

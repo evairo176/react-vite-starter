@@ -1,10 +1,13 @@
 import {
   AudioWaveform,
+  Award,
   BookOpen,
   Command,
   Frame,
   GalleryVerticalEnd,
   Map,
+  MessageSquare,
+  BarChart3,
   PieChart,
   SquareTerminal,
 } from "lucide-react";
@@ -54,10 +57,6 @@ export const data = {
           url: "/portfolio-management/category",
         },
         {
-          title: "Tag",
-          url: "/portfolio-management/tag",
-        },
-        {
           title: "Tech Stack",
           url: "/portfolio-management/tech-stack",
         },
@@ -77,9 +76,19 @@ export const data = {
       icon: BookOpen,
     },
     {
-      title: "Products",
-      url: "/products",
-      icon: PieChart,
+      title: "Comments",
+      url: "/dashboard/comments",
+      icon: MessageSquare,
+    },
+    {
+      title: "Achievements",
+      url: "/dashboard/achievements",
+      icon: Award,
+    },
+    {
+      title: "Analytics",
+      url: "/dashboard/analytics",
+      icon: BarChart3,
     },
   ],
   testing: [

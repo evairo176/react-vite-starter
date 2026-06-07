@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import AOS from "aos";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "@tanstack/react-router";
 
 import QueryClientProvider from "@/core/providers/query-provider";
-import { ThemeCustomizer } from "@/components/shared/ThemeCustomizer";
+import BackToTop from "@/components/shared/BackToTop";
 
 const HomeLayout = () => {
   useEffect(() => {
@@ -19,6 +19,9 @@ const HomeLayout = () => {
   return (
     <QueryClientProvider>
       <>
+        {/* Single navigation: the Sidebar (with profile + menu) is the only
+            navbar on the public site. The StickyHeader was removed to avoid a
+            duplicate top navigation. */}
         <div className="flex flex-col justify-center lg:flex-row lg:gap-5 lg:pt-10 relative">
           {/* Sidebar */}
 
@@ -36,6 +39,7 @@ const HomeLayout = () => {
           </motion.div>
         </div>
         <Footer />
+        <BackToTop />
       </>
     </QueryClientProvider>
   );

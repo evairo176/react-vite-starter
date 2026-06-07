@@ -1,7 +1,7 @@
-// src/router/GuestRoute.tsx
+// src/app/routes/GuestRoute.tsx
 
 import { useAuthStore } from "@/core/store/authStore";
-import { Navigate, Outlet, useLocation, matchPath } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "@tanstack/react-router";
 
 const AUTH_PATHS = ["/", "/login", "/forgot-password", "/reset-password"];
 
@@ -19,16 +19,13 @@ export default function GuestRoute() {
 
   // Hanya redirect ke /dashboard bila user sudah login *dan*
   // sedang mengakses salah satu halaman auth (mis. '/', '/login')
-  const isAuthRoute = AUTH_PATHS.some((p) =>
-    Boolean(matchPath({ path: p, end: true }, location.pathname)),
-  );
+  const isAuthRoute = AUTH_PATHS.includes(location.pathname);
 
   if (isAuthenticated && isAuthRoute) {
     return <Navigate to="/dashboard" replace />;
   }
 
   // Kalau user sudah login tapi bukan mengakses halaman auth, jangan redirect.
-  // Mengembalikan <Outlet /> agar router tetap bisa mencari route yang cocok
-  // (mis. ProtectedRoute / NotFound).
+  // Mengembalikan <Outlet /> agar router tetap bisa mencari route yang cocok.
   return <Outlet />;
 }

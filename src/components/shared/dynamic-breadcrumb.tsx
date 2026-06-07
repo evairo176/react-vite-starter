@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "@tanstack/react-router";
 
 import {
   Breadcrumb,
@@ -150,7 +150,7 @@ export default function DynamicBreadcrumb({
                   </BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink asChild>
-                    <Link to={href} className={inactiveClassName}>
+                    <Link to={href as string} className={inactiveClassName}>
                       {label}
                     </Link>
                   </BreadcrumbLink>

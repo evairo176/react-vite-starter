@@ -1,3 +1,3 @@
-import BlogPost from "./BlogPost";
+import AdminBlogManager from "./AdminBlogManager";
 
-export default BlogPost;
+export default AdminBlogManager;

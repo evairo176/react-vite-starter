@@ -1,9 +1,14 @@
 import SectionHeading from "@/components/shared/SectionHeading";
 import SectionSubHeading from "@/components/shared/SectionSubHeading";
 import { Eye, Heart, FileText, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 import type { IBlogPost } from "@/core/types/blogPost.type";
 import { fmtDate } from "@/core/utils/date";
+import {
+  ContentCardBody,
+  ContentCardMedia,
+  contentCardClassName,
+} from "@/components/shared/ContentCard";
 import useBlogs from "./useBlogs";
 
 const Blogs = () => {
@@ -11,7 +16,7 @@ const Blogs = () => {
 
   return (
     <section
-      className="space-y-6 mt-3 p-4 lg:p-8 rounded-md border bg-card text-card-foreground"
+      className="mt-3 space-y-6 rounded-md border bg-card p-4 text-card-foreground lg:p-8"
       id="blogs"
     >
       <div className="space-y-2">
@@ -19,69 +24,61 @@ const Blogs = () => {
         <SectionSubHeading>
           <p className="dark:text-neutral-400">Tulisan & catatan terbaru</p>
         </SectionSubHeading>
+      </div>
 
-        {isLoadingBlogs ? (
-          <div className="flex-1 flex items-center justify-center py-10">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-          </div>
-        ) : !dataBlogs || dataBlogs.length === 0 ? (
-          <div className="text-sm text-muted-foreground py-6">
-            Belum ada blog yang dipublikasikan.
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {dataBlogs.map((post: IBlogPost) => (
-              <Link
-                key={post.id}
-                to={`/blog/${post.slug}`}
-                className="group rounded-md border bg-background overflow-hidden hover:shadow-md transition flex flex-col"
-              >
-                {post.coverImage ? (
-                  <div className="aspect-video w-full overflow-hidden bg-muted">
-                    <img
-                      src={post.coverImage}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-[1.03] transition"
-                    />
-                  </div>
-                ) : (
-                  <div className="aspect-video w-full bg-muted flex items-center justify-center text-muted-foreground">
-                    <FileText className="w-8 h-8" />
-                  </div>
-                )}
+      {isLoadingBlogs ? (
+        <div className="flex flex-1 items-center justify-center py-10">
+          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
+        </div>
+      ) : !dataBlogs || dataBlogs.length === 0 ? (
+        <div className="py-6 text-sm text-muted-foreground">
+          Belum ada blog yang dipublikasikan.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {dataBlogs.map((post: IBlogPost) => (
+            <Link
+              key={post.id}
+              to="/blog/$slug"
+              params={{ slug: post.slug }}
+              aria-label={`Baca tulisan ${post.title}`}
+              className={contentCardClassName}
+            >
+              <ContentCardMedia
+                src={post.coverImage}
+                alt={post.title}
+                fallbackIcon={FileText}
+              />
 
-                <div className="p-4 flex flex-col gap-2 flex-1">
-                  <div className="text-xs text-muted-foreground">
-                    {fmtDate(post.updatedAt)}
-                  </div>
-                  <h3 className="font-semibold leading-snug line-clamp-2 group-hover:text-primary transition">
-                    {post.title}
-                  </h3>
-                  {post.excerpt && (
-                    <p className="text-sm text-muted-foreground line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                  )}
+              <ContentCardBody>
+                <div className="text-xs text-muted-foreground">
+                  {fmtDate(post.updatedAt)}
+                </div>
+                <h3 className="line-clamp-2 min-h-[2.75rem] font-semibold leading-snug transition group-hover:text-primary">
+                  {post.title}
+                </h3>
+                <p className="line-clamp-2 min-h-[2.5rem] text-sm text-muted-foreground">
+                  {post.excerpt || "Belum ada ringkasan untuk tulisan ini."}
+                </p>
 
-                  <div className="mt-auto flex items-center justify-between pt-3">
-                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                      <span className="inline-flex items-center gap-1">
-                        <Eye className="w-3.5 h-3.5" /> {post.totalViews}
-                      </span>
-                      <span className="inline-flex items-center gap-1">
-                        <Heart className="w-3.5 h-3.5" /> {post.totalLikes}
-                      </span>
-                    </div>
-                    <span className="inline-flex items-center text-xs font-medium text-primary">
-                      Baca <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                <div className="mt-auto flex items-center justify-between border-t pt-3">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-1">
+                      <Eye className="h-3.5 w-3.5" /> {post.totalViews}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <Heart className="h-3.5 w-3.5" /> {post.totalLikes}
                     </span>
                   </div>
+                  <span className="inline-flex items-center text-xs font-medium text-primary">
+                    Baca <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                  </span>
                 </div>
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
+              </ContentCardBody>
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
   );
 };

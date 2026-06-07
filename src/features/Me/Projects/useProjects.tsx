@@ -1,15 +1,15 @@
-import portfolioService from "@/core/services/portfolio.service";
+import publicPortfolioService from "@/core/services/publicPortfolio.service";
 import { useQuery } from "@tanstack/react-query";
 
+/**
+ * Home-page projects data. Uses the PUBLIC portfolio endpoint (published only,
+ * no auth required) so the landing page works for guests, and requests
+ * featured-first ordering matching the dedicated `/projects` list.
+ */
 const useProjects = () => {
   const findAll = async () => {
-    let params = `limit=${100}&page=${1}`;
-
-    const res = await portfolioService.findAll(`${params}`);
-
-    const { data } = res;
-
-    return data?.data;
+    const res = await publicPortfolioService.getPublicList("limit=6&page=1");
+    return res?.data?.data;
   };
 
   const { data: dataPortfolio, isLoading: isLoadingPortfolio } = useQuery({

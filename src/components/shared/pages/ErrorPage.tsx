@@ -1,17 +1,17 @@
-import { useNavigate, useRouteError } from "react-router-dom"
+import { useRouter, type ErrorComponentProps } from "@tanstack/react-router"
 import { motion } from "framer-motion"
 
-const ErrorPage: React.FC = () => {
-  const navigate = useNavigate()
-  const error: any = useRouteError()
+const ErrorPage = ({ error }: Partial<ErrorComponentProps>) => {
+  const router = useRouter()
 
-  const goHome = () => navigate("/")
-  const goBack = () => navigate(-1)
+  const goHome = () => router.navigate({ to: "/" })
+  const goBack = () => router.history.back()
 
-  const status = error?.status || 404
+  const err = error as any
+  const status = err?.status || 404
   const message =
-    error?.statusText ||
-    error?.message ||
+    err?.statusText ||
+    err?.message ||
     "Something went wrong. The page couldn’t be found."
 
   return (

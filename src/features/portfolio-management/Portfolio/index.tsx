@@ -1,3 +1,3 @@
-import Portfolio from "./Portfolio";
+import AdminPortfolioManager from "./AdminPortfolioManager";
 
-export default Portfolio;
+export default AdminPortfolioManager;

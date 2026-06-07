@@ -17,7 +17,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "@tanstack/react-router";
 
 export function NavMain({
   items,
@@ -68,7 +68,7 @@ export function NavMain({
                     }
                   `}
                 >
-                  <Link to={item.url ?? "#"}>
+                  <Link to={(item.url ?? "#") as string}>
                     {item.icon && (
                       <item.icon
                         className={`w-4 h-4 ${
@@ -138,7 +138,7 @@ export function NavMain({
                             `}
                           >
                             <Link
-                              to={subItem.url}
+                              to={subItem.url as string}
                               className="flex items-center gap-2"
                             >
                               {isActiveSub && (

@@ -13,7 +13,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import { useMobileNavigation } from "@/hooks/useMobileNavigation";
 import { useAuthStore } from "@/core/store/authStore";
 import { LogOut, MoreVertical, Settings } from "lucide-react";
@@ -42,7 +42,7 @@ export function NavUser({
 
       logout();
 
-      navigate("/");
+      navigate({ to: "/" });
     } catch (error) {
       toast.error("ERROR LOGOUT", {
         description: "Please try agaian",

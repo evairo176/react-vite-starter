@@ -1,6 +1,5 @@
 import QueryClientProvider from "@/core/providers/query-provider";
-import { Outlet } from "react-router-dom";
-import { Toaster } from "sonner";
+import { Outlet } from "@tanstack/react-router";
 import { AppSidebar } from "@/components/app-sidebar";
 
 import { Separator } from "@/components/ui/separator";
@@ -15,8 +14,6 @@ import { ThemeCustomizer } from "@/components/shared/ThemeCustomizer";
 const DashboardLayout = () => {
   return (
     <QueryClientProvider>
-      <Toaster richColors closeButton />
-
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>

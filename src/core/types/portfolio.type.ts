@@ -1,5 +1,4 @@
 import type { IPCategory } from "./category.type";
-import type { IPTag } from "./tag.type";
 import type { IPTechStack } from "./techStack.type";
 import { z } from "zod";
 
@@ -27,13 +26,6 @@ export interface IPPortfolio {
     alt: string;
     position: number;
   }[];
-  tags: [
-    {
-      portfolioId: "bdef308a-20a9-4398-a800-416ac0349ad0";
-      tagId: "f3f013bc-9b4b-4437-aa06-3c983e8b0d1b";
-      tag: IPTag;
-    }
-  ];
   techStacks: [
     {
       portfolioId: "bdef308a-20a9-4398-a800-416ac0349ad0";
@@ -41,6 +33,18 @@ export interface IPPortfolio {
       tech: IPTechStack;
     }
   ];
+}
+
+/**
+ * Public case-study shape returned by `GET /portfolio/public/:slug`.
+ * Extends the base portfolio with the optional case-study narrative fields
+ * (problem/solution/results) rendered on the Project_Case_Study_View.
+ * (Req 2.5, 2.9)
+ */
+export interface PublicProject extends IPPortfolio {
+  problem?: string | null;
+  solution?: string | null;
+  results?: string | null;
 }
 
 export const PortfolioImageSchema = z.object({
@@ -60,11 +64,16 @@ export const CreatePortfolioSchema = z.object({
   liveUrl: z.string().nullable().optional(),
   repoUrl: z.string().nullable().optional(),
 
+  // Case-study narrative fields rendered on the Project_Case_Study_View and
+  // editable from the Admin_Portfolio_Manager. (Req 11.7)
+  problem: z.string().optional(),
+  solution: z.string().optional(),
+  results: z.string().optional(),
+
   featured: z.boolean(),
   isPublished: z.boolean(),
 
   images: z.array(PortfolioImageSchema).optional(),
-  tagIds: z.array(z.string().min(1)).min(1, "Minimal 1 tag"),
   techIds: z.array(z.string().min(1)).min(1, "Minimal 1 tech"),
 });
 

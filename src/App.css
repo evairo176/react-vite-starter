@@ -181,4 +181,14 @@
   body {
     @apply bg-background text-foreground;
   }
+  /*
+   * Smooth scrolling for in-page anchors / navigation that targets a section
+   * on the current page (Req 17.4). Gated behind the reduced-motion media
+   * query so visitors who request reduced motion get instant jumps instead.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }

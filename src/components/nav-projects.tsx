@@ -26,7 +26,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-import { useLocation, Link } from "react-router-dom"; // ← tambahkan ini
+import { useLocation, Link } from "@tanstack/react-router"; // ← tambahkan ini
 
 export function NavProjects({
   projects,
@@ -54,7 +54,7 @@ export function NavProjects({
                 asChild
                 className={isActive ? "bg-accent text-accent-foreground" : ""}
               >
-                <Link to={item.url}>
+                <Link to={item.url as string}>
                   <item.icon />
                   <span>{item.name}</span>
                 </Link>

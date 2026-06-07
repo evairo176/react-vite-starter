@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "@tanstack/react-router"
 import { motion } from "framer-motion"
 
 const NotFound: React.FC = () => {
-  const navigate = useNavigate()
+  const router = useRouter()
 
-  const goBack = () => navigate(-1)
+  const goBack = () => router.history.back()
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 px-6">

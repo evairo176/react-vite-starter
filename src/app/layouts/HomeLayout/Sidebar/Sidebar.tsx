@@ -11,7 +11,7 @@ import ModeToggle from "../ModeToggle";
 import Profile from "../Profile";
 import { MENU } from "../constant";
 import { Button } from "@/components/ui/button";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "@tanstack/react-router";
 import MenuOpen from "../MenuOpen";
 
 const Sidebar = () => {
@@ -85,7 +85,7 @@ const Sidebar = () => {
                       asChild
                       aria-label={row.title}
                     >
-                      <Link to={row.url}>
+                      <Link to={row.url as string}>
                         {row.icon} {row.title}
                       </Link>
                     </Button>
@@ -112,7 +112,7 @@ const Sidebar = () => {
                   aria-label={row.title}
                   asChild
                 >
-                  <Link to={row.url}>
+                  <Link to={row.url as string}>
                     {row.icon} {row.title}
                     {pathname === row.url && (
                       <motion.span

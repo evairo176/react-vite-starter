@@ -23,4 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-.envpnpm-workspace.yaml
+.env
+.env.local
+.env.*.local
+pnpm-workspace.yaml
+

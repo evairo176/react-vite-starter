@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import router from "./app/routes/index.tsx";
 import "./App.css";
-import { RouterProvider } from "react-router-dom";
+import { RouterProvider } from "@tanstack/react-router";
 import { ThemeProvider } from "./core/providers/theme-provider.tsx";
 import { HelmetProvider } from "react-helmet-async";
 import ReactGA from "react-ga4";
