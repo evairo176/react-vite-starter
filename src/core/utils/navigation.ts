@@ -3,6 +3,7 @@ import {
   Award,
   BookOpen,
   Command,
+  Database,
   Frame,
   GalleryVerticalEnd,
   Map,
@@ -89,6 +90,11 @@ export const data = {
       title: "Analytics",
       url: "/dashboard/analytics",
       icon: BarChart3,
+    },
+    {
+      title: "Backup & Restore",
+      url: "/dashboard/backup",
+      icon: Database,
     },
   ],
   testing: [

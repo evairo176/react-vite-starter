@@ -37,6 +37,8 @@ import AdminAnalyticsView from "@/features/dashboard/Analytics";
 import AdminCommentManager from "@/features/blog-comment/CommentManager";
 // Admin achievement manager view.
 import AchievementManager from "@/features/achievement/AchievementManager";
+// Admin backup & restore view.
+import BackupManager from "@/features/dashboard/Backup";
 import { useAuthStore } from "@/core/store/authStore";
 
 // 🔥 GLOBAL WRAPPER (renders <AnalyticsTracker /> + <Outlet />)
@@ -213,6 +215,12 @@ const dashboardAchievementsRoute = createRoute({
   component: AchievementManager,
 });
 
+const dashboardBackupRoute = createRoute({
+  getParentRoute: () => dashboardLayoutRoute,
+  path: "/dashboard/backup",
+  component: BackupManager,
+});
+
 /* -------------------------------------------------------------------------- */
 /*                               Route tree                                   */
 /* -------------------------------------------------------------------------- */
@@ -243,6 +251,7 @@ const routeTree = rootRoute.addChildren([
       dashboardAnalyticsRoute,
       dashboardCommentsRoute,
       dashboardAchievementsRoute,
+      dashboardBackupRoute,
     ]),
   ]),
 ]);
