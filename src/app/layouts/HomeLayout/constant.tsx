@@ -42,6 +42,13 @@ import {
   SiDotnet,
   SiPython,
   SiGithubactions,
+  SiDocker,
+  SiMongodb,
+  SiRedis,
+  SiKubernetes,
+  SiApachespark,
+  SiApacheairflow,
+  SiApachekafka,
 } from "react-icons/si";
 import { HiAcademicCap, HiBriefcase } from "react-icons/hi";
 
@@ -114,6 +121,38 @@ export const STACKS = [
     icon: <SiGithubactions size={iconSize} color="#2088FF" />,
   },
   {
+    name: "Docker",
+    icon: <SiDocker size={iconSize} color="#2496ED" />,
+  },
+  {
+    name: "PostgreSql",
+    icon: <BiLogoPostgresql size={iconSize} className="text-blue-400" />,
+  },
+  {
+    name: "MongoDB",
+    icon: <SiMongodb size={iconSize} color="#47A248" />,
+  },
+  {
+    name: "Redis",
+    icon: <SiRedis size={iconSize} color="#FF4438" />,
+  },
+  {
+    name: "Apache Spark",
+    icon: <SiApachespark size={iconSize} color="#E25A1C" />,
+  },
+  {
+    name: "Apache Airflow",
+    icon: <SiApacheairflow size={iconSize} color="#017CEE" />,
+  },
+  {
+    name: "Apache Kafka",
+    icon: <SiApachekafka size={iconSize} className="text-foreground" />,
+  },
+  {
+    name: "Kubernetes",
+    icon: <SiKubernetes size={iconSize} color="#326CE5" />,
+  },
+  {
     name: "TailwindCSS",
     icon: <SiTailwindcss size={iconSize} className="text-cyan-300" />,
   },
@@ -128,10 +167,6 @@ export const STACKS = [
   {
     name: "Vite",
     icon: <SiVite size={iconSize} className="text-purple-500" />,
-  },
-  {
-    name: "PostgreSql",
-    icon: <BiLogoPostgresql size={iconSize} className="text-blue-400" />,
   },
   {
     name: "ChakraUI",
@@ -245,60 +280,62 @@ export const STACKS = [
 
 export const CAREER = [
   {
-    title: `Senior Full-Stack Programmer
+    title: `Senior Fullstack Developer
 Fiberstar (PT. Mega Akses Persada)`,
-    desc: `Bertanggung jawab merancang dan mengembangkan aplikasi end-to-end untuk mendukung operasional bisnis Fiberstar. Berperan sebagai Senior Full-Stack Programmer, saya menangani arsitektur sistem, pengembangan backend & frontend, code review, mentoring tim, integrasi service, optimasi performa, serta memastikan kualitas delivery sesuai standar enterprise.`,
-    location: "Jakarta, Indonesia",
+    desc: `Merancang aplikasi enterprise internal untuk operasional jaringan Fiberstar, mengintegrasikan backend SQL Server dengan frontend Angular/.NET yang dipakai harian oleh tim lapangan dan operasional. Membangun "One Act" — sistem manajemen approval material & otomasi instalasi jaringan (.NET, Angular, Express.js, SQL Server). Memimpin code review dan mentoring 4+ developer (menurunkan defect pasca-rilis ~30%), serta merekayasa pipeline CI/CD self-hosted yang memangkas waktu deployment dari ~30 menit menjadi di bawah 5 menit.`,
+    location: "Jakarta Selatan, Indonesia",
     startYear: "Apr 2026",
     endYear: "Sekarang",
     icon: HiBriefcase,
     highlight: true,
   },
   {
-    title: `Full-Stack Developer KPN Plantation`,
-    desc: `Saya melakukan analisis kebutuhan dan permasalahan bisnis untuk diterjemahkan menjadi business process yang terstruktur dan mudah dipahami oleh tim developer, mendesain flowchart sistem serta skema database untuk setiap proyek, bertanggung jawab sebagai Backend dan Frontend Developer dalam proses pengembangan aplikasi, mempresentasikan flowchart, skema database, serta timeline pengembangan per modul kepada atasan atau stakeholder, serta melakukan maintenance, perbaikan bug, dan pengembangan fitur lanjutan pada proyek yang telah berjalan.`,
-    location: "Jakarta Selatan, Jakarta",
+    title: `Fullstack Developer (Tech Lead)
+KPN Plantation`,
+    desc: `Tech lead yang mengirimkan 8+ sistem enterprise end-to-end (business process, desain database, UI/UX, frontend & backend) untuk operasional perkebunan kelapa sawit. Antara lain: Platform EUDR Compliance (memangkas waktu pelaporan ~40%), AI RAG System yang melayani 1.000+ staf internal dan menurunkan tiket support engineering rutin ~50%, Data Warehouse Analytics Produksi dengan ETL Spark/Airflow memproses 5jt+ record/bulan, serta monitoring real-time tanah & air tanah di 500+ blok perkebunan.`,
+    location: "Jakarta Selatan, Indonesia",
     startYear: "Agu 2023",
     endYear: "Mar 2026",
     icon: HiBriefcase,
     highlight: false,
   },
   {
-    title: `Studi S1
-Universitas Siber asia`,
-    desc: `saya lulus setelah 2 tahun belajar, karena saya sudah memiliki pengalaman kerja sebelumnya. Saya memutuskan untuk melanjutkan studi S1 untuk memperdalam pengetahuan saya dalam bidang teknologi informasi dan meningkatkan keterampilan saya sebagai seorang profesional di industri ini.`,
-    location: "Jakarta Selatan, DKI Jakarta",
-    startYear: "Okt 2024",
-    endYear: "Jun 2026",
+    title: `Studi S1 Informatika
+Universitas Siber Asia`,
+    desc: `Melanjutkan studi S1 Ilmu Komputer (IPK 3.62) sembari bekerja, untuk memperdalam fondasi teknologi informasi dan meningkatkan keterampilan sebagai profesional di industri ini.`,
+    location: "Jakarta, Indonesia",
+    startYear: "Jan 2024",
+    endYear: "Apr 2026",
     icon: HiAcademicCap,
     highlight: false,
   },
   {
-    title: `Full-Stack Developer Frelance`,
-    desc: `Pengalaman freelance memungkinkan saya bekerja secara mandiri dalam menangani berbagai proyek dengan tanggung jawab penuh, mulai dari perencanaan hingga penyelesaian. Saya terbiasa beradaptasi dengan kebutuhan proyek yang beragam, berkomunikasi secara efektif, serta memberikan solusi teknis yang tepat dan efisien untuk mencapai tujuan yang ditetapkan.`,
-    location: "WFH, Kerja dari rumah",
-    startYear: "Juli 2023",
-    endYear: "Agu 2024",
-    icon: HiBriefcase,
-    highlight: false,
-  },
-  {
-    title: `Full-Stack Developer 
-PT. Xtreme Network Sistem`,
-    desc: `Mengembangkan aplikasi web berbasis React dan Laravel, termasuk fitur integrasi Google Maps, payment gateway Xendit, serta pengelolaan dashboard dengan sistem notifikasi dan email terintegrasi.`,
-    location: "Jakarta Selatan, Jakarta",
+    title: `Fullstack Web Developer
+PT. Extreme Network Sistem`,
+    desc: `Mengembangkan Tnosworld PWA untuk pemesanan jasa keamanan dan registrasi badan hukum, mengintegrasikan Google Maps dan custom payment gateway Xendit yang memproses hingga ~1.000 transaksi/bulan (React.js, Laravel, MySQL, Redux Toolkit). Membangun backend dan frontend di berbagai modul klien, serta mengirimkan notifikasi push Android dan alert order via Telegram.`,
+    location: "Jakarta Selatan, Indonesia",
     startYear: "Okt 2022",
     endYear: "Jul 2023",
     icon: HiBriefcase,
     highlight: false,
   },
   {
-    title: `Studi Diploma 3
+    title: `Fullstack Web Developer (Internship)
+PT. Technogis Indonesia`,
+    desc: `Membangun website manajemen inventaris berbasis Laravel yang menggantikan pencatatan manual spreadsheet dan mengurangi upaya rekonsiliasi stok. Mengonversi 18 halaman Figma menjadi HTML yang responsif dan pixel-accurate untuk situs utama Jagoweb.`,
+    location: "Yogyakarta, Indonesia",
+    startYear: "Jul 2021",
+    endYear: "Des 2021",
+    icon: HiBriefcase,
+    highlight: false,
+  },
+  {
+    title: `Studi Diploma 3 Teknik Informatika
 Politeknik Negeri Indramayu`,
-    desc: `Saya lulus setelah 3 tahun belajar. Saya segera mendapatkan pekerjaan sebagai pengembang full-stack.`,
+    desc: `Lulus D3 Teknik Informatika (IPK 3.46). Setelah lulus langsung melanjutkan karier sebagai fullstack developer.`,
     location: "Indramayu, Jawa Barat",
-    startYear: "Sep 2019",
-    endYear: "Okt 2022",
+    startYear: "Jan 2019",
+    endYear: "Jan 2022",
     icon: HiAcademicCap,
     highlight: false,
   },

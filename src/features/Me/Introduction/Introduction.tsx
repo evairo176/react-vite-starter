@@ -27,19 +27,24 @@ const Introduction = () => {
       </div>
       <div className="space-y-4">
         <ul className="flex flex-col lg:flex-row gap-1 lg:gap-8 ml-5 list-disc text-neutral-700 dark:text-neutral-400">
-          <li>Developer Full-Stack</li>
+          <li>Senior Fullstack Developer</li>
+          <li>.NET · React/Next.js · Node.js · Golang</li>
           <li>
             Lokasi di Indramayu, Jawa Barat <span className="ml-1">🇮🇩</span>
           </li>
         </ul>
         <p className="leading-[1.8] md:leading-loose text-neutral-800 dark:text-neutral-300 text-justify">
-          Saya merupakan seorang Fullstack Developer dengan pengalaman 4 tahun
-          dalam pengembangan aplikasi web atau mobile dan sistem yang
-          terintegrasi. Memiliki kemampuan analisis yang kuat dalam
-          menerjemahkan kebutuhan bisnis menjadi solusi terstruktur dan efektif.
-          Terbiasa bekerja secara mandiri maupun dalam tim, serta mampu menyusun
-          dan mempresentasikan rancangan proyek secara sistematis dengan fokus
-          pada hasil, kualitas kode, dan efisiensi pengembangan.
+          Saya seorang Senior Fullstack Developer dengan pengalaman lebih dari 5
+          tahun membangun aplikasi yang skalabel dan data-intensive di lingkungan
+          enterprise maupun plantation-tech. Core stack saya meliputi .NET,
+          React/Next.js, Golang, dan Node.js, dengan pengalaman langsung di data
+          engineering (Apache Spark, Airflow) serta penerapan AI/RAG. Saya pernah
+          mengirimkan platform EUDR compliance yang memangkas waktu pelaporan
+          ~40% dan sistem monitoring real-time di 500+ blok perkebunan, sembari
+          memimpin code review dan mentoring engineer. Memiliki kemampuan
+          analisis yang kuat dalam menerjemahkan kebutuhan bisnis menjadi solusi
+          terstruktur dan efektif, dengan fokus pada hasil, kualitas kode, dan
+          efisiensi pengembangan.
         </p>
       </div>
     </section>
