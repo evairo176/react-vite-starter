@@ -20,7 +20,7 @@ import useProjects from "./useProjects";
  * link to the full list.
  */
 const Projects = () => {
-  const { dataPortfolio, isLoadingPortfolio } = useProjects();
+  const { dataPortfolio, totalProjects, isLoadingPortfolio } = useProjects();
 
   const projects = Array.isArray(dataPortfolio)
     ? [...dataPortfolio]
@@ -37,12 +37,24 @@ const Projects = () => {
     >
       <div className="flex items-start justify-between gap-4">
         <div className="space-y-2">
-          <SectionHeading
-            title={"Proyek Saya"}
-            icon={<AiOutlineFundProjectionScreen className="mr-2" />}
-          />
+          <div className="flex flex-wrap items-center gap-3">
+            <SectionHeading
+              title={"Proyek Saya"}
+              icon={<AiOutlineFundProjectionScreen className="mr-2" />}
+            />
+            {!isLoadingPortfolio && totalProjects > 0 ? (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary">
+                <AiOutlineFundProjectionScreen className="size-4" />
+                {totalProjects} proyek
+              </span>
+            ) : null}
+          </div>
           <SectionSubHeading>
-            <p className="dark:text-neutral-400">Proyek profesional saya</p>
+            <p className="dark:text-neutral-400">
+              {totalProjects > 0
+                ? `${totalProjects} proyek profesional yang telah saya kerjakan`
+                : "Proyek profesional saya"}
+            </p>
           </SectionSubHeading>
         </div>
         <Link
